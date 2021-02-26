@@ -1,14 +1,5 @@
 {
   "projects": {
     "default": "pridetimer"
-  },
-  "targets": {
-    "pridetimer": {
-      "hosting": {
-        "prideTimer": [
-          "pridetimer"
-        ]
-      }
-    }
   }
 }

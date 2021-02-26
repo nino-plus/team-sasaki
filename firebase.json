@@ -9,7 +9,7 @@
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ]
   },
-  "hosting": [
+  "hosting":
     {
       "public": "dist/prideTimer",
       "ignore": [
@@ -24,31 +24,6 @@
         }
       ]
     },
-    {
-      "target": "prideTimer",
-      "public": "dist/prideTimer",
-      "ignore": [
-        "**/.*"
-      ],
-      "headers": [
-        {
-          "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
-          "headers": [
-            {
-              "key": "Cache-Control",
-              "value": "public,max-age=31536000,immutable"
-            }
-          ]
-        }
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    }
-  ],
   "storage": {
     "rules": "storage.rules"
   }
