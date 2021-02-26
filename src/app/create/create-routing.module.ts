@@ -6,7 +6,6 @@ import { CreateComponent } from './create/create.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: CreateComponent,
   },
 ];
