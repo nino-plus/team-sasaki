@@ -1,0 +1,25 @@
+.layout {
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 80px auto 100px;
+  grid-template-areas:
+    'header header'
+    'sidenav main'
+    'footer footer';
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidenav {
+  grid-area: sidenav;
+}
+
+.main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
+}
