@@ -4,54 +4,76 @@ import { GiveupDialogComponent } from '../giveup-dialog/giveup-dialog.component'
 import { FinishDialogComponent } from '../finish-dialog/finish-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from '../services/task.service';
-import { Task } from '../interfaces/task';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-  Istask: boolean = true;
   activeTask;
-  createdAt: number;
-  timeLimit: number;
-  now: Date;
-  timeLimitDate: string;
+  limitTime: string;
+  timeLimitDate;
+  value: number;
+  timer$: Observable<number> = new Observable((observer) => {
+    const interval = setInterval(() => {
+      observer.next(Date.now());
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  });
+  subscription: Subscription;
+  time: number;
 
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private taskService: TaskService
-  ) {
-    setInterval(() => {
-      this.now = new Date();
-    }, 1000);
-  }
+    private taskService: TaskService,
+    private afn: AngularFireFunctions
+  ) {}
 
   ngOnInit(): void {
     this.taskService.getActiveTask().subscribe((tasks) => {
       if (tasks) {
         this.activeTask = tasks[0];
-        this.createdAt = this.activeTask.createdAt.toDate().getTime();
-        this.timeLimit = this.activeTask.timeLimit * 60000;
-        const timeLimitNum = this.timeLimit + this.createdAt;
-        const timeLimitDate = new Date(timeLimitNum);
-        const hour = timeLimitDate.getHours();
-        const minutes = timeLimitDate.getMinutes();
-        this.timeLimitDate = `${hour}:${minutes}`;
+        this.subscription = this.timer$.subscribe((date) => {
+          this.calculateRemainingSeconds(date);
+        });
       }
     });
   }
 
-  calculateRemainingTime() {
-    if (this.now) {
-      const remainingTime =
-        (this.timeLimit - (this.now.getTime() - this.createdAt)) / 1000;
-      const hoursLeft = Math.floor(remainingTime / (60 * 60)) % 24;
-      const minitesLeft = Math.floor(remainingTime / 60) % 60;
-      const secondsLeft = Math.floor(remainingTime) % 60;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  calculateRemainingSeconds(date: number) {
+    if (this.activeTask) {
+      const timeLimitNum =
+        this.activeTask.timeLimit * 60000 +
+        this.activeTask.createdAt.toDate().getTime();
+      const timeLimitDate = new Date(timeLimitNum);
+      const hour = timeLimitDate.getHours();
+      const minutes = timeLimitDate.getMinutes();
+      this.timeLimitDate = `${hour}:${minutes}`;
+      const remainingSeconds =
+        (this.activeTask.timeLimit * 60000 -
+          (date - this.activeTask.createdAt.toDate().getTime())) /
+        1000;
+      this.value = (remainingSeconds / (this.activeTask.timeLimit * 60)) * 100;
+
+      if (remainingSeconds <= 0) {
+        this.taskService.updateTaskStatusFailure(this.activeTask.taskId);
+        const callable = this.afn.httpsCallable('subtractPoint');
+        return callable({}).toPromise();
+      }
+      const hoursLeft = Math.floor(remainingSeconds / (60 * 60)) % 24;
+      const minitesLeft = Math.floor(remainingSeconds / 60) % 60;
+      const secondsLeft = Math.floor(remainingSeconds) % 60;
       const time = `${hoursLeft}:${minitesLeft}:${secondsLeft}`;
-      return time;
+      this.limitTime = time;
     }
   }
 

@@ -5,12 +5,12 @@
       <mat-progress-spinner
         class="task__spinner"
         [diameter]="250"
-        [value]="100"
+        [value]="value"
       >
       </mat-progress-spinner>
       <div class="task__limit">
-        <p class="task__remaining-time">{{ calculateRemainingTime() }}</p>
-        <p class="task__limit-time">{{ this.timeLimitDate }}</p>
+        <p class="task__remaining-time">{{ limitTime }}</p>
+        <p class="task__limit-time">{{ timeLimitDate }}</p>
       </div>
       <div class="task__maxim">
         <h2 class="task__maxim-title">今日の名言</h2>
