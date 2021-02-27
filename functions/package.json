@@ -26,5 +26,11 @@
     "firebase-functions-test": "^0.2.0",
     "typescript": "^3.8.0"
   },
+  "eslintIgnore": [
+    "/.eslintrc.js",
+    "lib/discord.function.js",
+    "lib/index.js",
+    "lib/user.function.js"
+  ],
   "private": true
 }

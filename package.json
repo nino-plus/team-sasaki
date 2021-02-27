@@ -28,6 +28,9 @@
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
     "firebase": "^8.2.9",
+    "firebase-admin": "^9.5.0",
+    "firebase-functions": "^3.13.2",
+    "node-fetch": "^2.6.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
