@@ -11,16 +11,11 @@ export class WelcomeComponent implements OnInit {
   user$ = this.userService.user$;
   afUser$ = this.authService.afUser$;
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(
+    public authService: AuthService,
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
-  }
-
-  login(): void {
-    this.authService.login();
-  }
-
-  logout(): void {
-    this.authService.logout();
   }
 }

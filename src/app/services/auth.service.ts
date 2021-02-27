@@ -25,13 +25,27 @@ export class AuthService {
     this.loginProcessing = true;
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    this.afAuth.signInWithPopup(provider).catch((error) => console.error(error));
-    this.loginProcessing = false;
+    this.afAuth.signInWithPopup(provider)
+      .then(() => {
+        this.router.navigateByUrl('/');
+        this.loginProcessing = false;
+      })
+      .catch((error) => {
+        console.error(error);
+        this.loginProcessing = false;
+      });
   }
 
   logout(): void {
     this.loginProcessing = true;
-    this.afAuth.signOut().then(() => this.router.navigateByUrl('/welcome')).catch((error) => console.error(error));
-    this.loginProcessing = false;
+    this.afAuth.signOut()
+      .then(() => {
+        this.router.navigateByUrl('/welcome');
+        this.loginProcessing = false;
+      })
+      .catch((error) => {
+        console.error(error);
+        this.loginProcessing = false;
+      });
   }
 }
