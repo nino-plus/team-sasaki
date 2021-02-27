@@ -1,5 +1,30 @@
 @import 'mixins';
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.main {
+  padding-top: 64px;
+  @include sp {
+    padding-top: 54px;
+  }
+}
+
 .side {
   width: 400px;
+  @include sp {
+    width: 320px;
+  }
+}
+
+.menu-btn {
+  margin-right: 8px;
+  mat-icon {
+    color: #fff;
+  }
 }

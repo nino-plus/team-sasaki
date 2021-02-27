@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UiService } from '../services/ui.service';
 
 @Component({
   selector: 'app-shell',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShellComponent implements OnInit {
 
-  constructor() { }
+  isPcScreen: boolean = this.uiService.isLargeScreen();
+
+  constructor(
+    private uiService: UiService
+  ) { }
 
   ngOnInit(): void {
   }

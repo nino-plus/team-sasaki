@@ -1,17 +1,28 @@
-<app-header class="header"></app-header>
 <mat-sidenav-container>
   <mat-sidenav
     class="side"
     fixedInViewport
-    [fixedTopGap]="64"
+    [fixedTopGap]="isPcScreen ? 64 : 56"
     #sidenav
-    mode="side"
+    [mode]="isPcScreen ? 'side' : 'hide'"
     opened
   >
     <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <app-header class="header">
+      <button
+        class="menu-btn"
+        (click)="sidenav.toggle()"
+        mat-icon-button
+        *ngIf="!isPcScreen"
+      >
+        <mat-icon inlne="true">menu</mat-icon>
+      </button>
+    </app-header>
+    <div class="main">
+      <router-outlet></router-outlet>
+    </div>
     <app-footer class="footer"></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
