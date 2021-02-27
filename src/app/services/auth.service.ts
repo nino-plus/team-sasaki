@@ -4,25 +4,29 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import firebase from 'firebase';
 import { UserService } from './user.service';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   uid: string;
-  afUser$: Observable<firebase.User> = this.afAuth.user;
+  afUser$: Observable<firebase.User> = this.afAuth.user.pipe(
+    map((user) => {
+      this.uid = user.uid;
+      return user;
+    })
+  );
   afUser: firebase.User;
   loginProcessing = false;
 
   constructor(
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private router: Router,
     private userService: UserService
   ) {
     this.afUser$.subscribe((user) => {
       this.afUser = user && user;
-      this.uid = user.uid;
     });
   }
 
@@ -30,9 +34,13 @@ export class AuthService {
     this.loginProcessing = true;
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    this.afAuth.signInWithPopup(provider)
+    this.afAuth
+      .signInWithPopup(provider)
       .then((userCredential) => {
-        return this.userService.getUser(userCredential.user.uid).pipe(take(1)).toPromise();
+        return this.userService
+          .getUser(userCredential.user.uid)
+          .pipe(take(1))
+          .toPromise();
       })
       .then((user) => {
         if (user?.webhookURL) {
@@ -50,7 +58,8 @@ export class AuthService {
 
   logout(): void {
     this.loginProcessing = true;
-    this.afAuth.signOut()
+    this.afAuth
+      .signOut()
       .then(() => {
         this.router.navigateByUrl('/welcome');
         this.loginProcessing = false;
