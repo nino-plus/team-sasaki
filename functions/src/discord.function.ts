@@ -1,6 +1,5 @@
 import * as functions from 'firebase-functions';
 import { db } from '.';
-// eslint-disable-next-line import/no-extraneous-dependencies
 const fetch = require('node-fetch');
 
 export const sendFailureResult = functions
