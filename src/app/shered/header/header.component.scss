@@ -39,6 +39,7 @@ button {
     position: fixed;
     bottom: 16px;
     right: 16px;
+    z-index: 100;
     button {
       border-radius: 50%;
       padding: 10px;

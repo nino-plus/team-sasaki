@@ -21,9 +21,7 @@ export class HeaderComponent implements OnInit {
     private uiService: UiService
   ) { }
 
-  ngOnInit(): void {
-    this.openCreateTaskDialog();
-  }
+  ngOnInit(): void { }
 
   openCreateTaskDialog(): void {
     this.dialog.open(CreateTaskDialogComponent, {
