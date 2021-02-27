@@ -25,4 +25,11 @@ export class UserService {
   getUser(uid: string): Observable<User> {
     return this.db.doc<User>(`users/${uid}`).valueChanges();
   }
+
+  updateUser(user: User, newUserData: Partial<User>): Promise<void> {
+    return this.db.doc<User>(`users/${user.uid}`).set({
+      ...user,
+      ...newUserData
+    }, { merge: true });
+  }
 }

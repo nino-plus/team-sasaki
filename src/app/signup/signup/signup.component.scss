@@ -1,0 +1,15 @@
+.signup {
+  &__title {
+    text-align: center;
+  }
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 40px auto;
+  > mat-form-field {
+    margin-bottom: 16px;
+  }
+}
