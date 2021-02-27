@@ -4,13 +4,7 @@
   <form [formGroup]="form" (ngSubmit)="createTask()">
     <mat-form-field appearance="outline">
       <mat-label>タイトル</mat-label>
-      <input
-        (change)="(isTimeValid)"
-        matInput
-        type="text"
-        formControlName="title"
-        required
-      />
+      <input matInput type="text" formControlName="title" required />
       <mat-hint align="end" *ngIf="titleCtl.value.length">
         {{ titleCtl.value.length }} / {{ TITLE_MAX_LENGTH }}
       </mat-hint>
