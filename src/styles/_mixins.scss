@@ -1,16 +1,10 @@
-//breakpointの指定
-@mixin sm {
-  @media screen and (min-width: 600px) {
+@mixin sp {
+  @media screen and (max-width: 700px) {
     @content;
   }
 }
-@mixin md {
-  @media screen and (min-width: 960px) {
-    @content;
-  }
-}
-@mixin lg {
-  @media screen and (min-width: 1280px) {
+@mixin pc {
+  @media screen and (min-width: 701px) {
     @content;
   }
 }
