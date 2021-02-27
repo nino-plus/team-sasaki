@@ -8,20 +8,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 24px;
+  @include sp {
+    padding: 24px 16px;
+  }
 }
 
 .task {
   position: relative;
   text-align: center;
-  width: 80%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   border-radius: 10px;
   padding-top: 20px;
   background-color: $color-sidenavContent;
-  @include sp {
-    width: 90%;
-  }
   &__title {
     position: absolute;
     top: 20px;
