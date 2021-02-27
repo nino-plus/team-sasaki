@@ -12,5 +12,7 @@ export const createUser = functions
       uid: user.uid,
       name: user.displayName,
       email: user.email,
+      point: 0,
+      latestCreatedTaskDate: admin.firestore.Timestamp.now(),
     });
   });
