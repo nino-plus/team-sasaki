@@ -1,0 +1,17 @@
+@import 'variables';
+
+.header {
+  background-color: $color-background;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.logo {
+  text-align: center;
+  color: $color-font-white;
+  font-size: 32px;
+  margin: 0;
+  font-family: $font-logo;
+}
