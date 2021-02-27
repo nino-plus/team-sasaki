@@ -9,7 +9,7 @@ export class UiService {
 
   isLargeScreen(element?: HTMLElement): boolean {
     const screenWidth = window.innerWidth || element.clientWidth;
-    const mobileScreen = 600;
+    const mobileScreen = 700;
     if (screenWidth >= mobileScreen) {
       return true;
     } else {
