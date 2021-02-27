@@ -10,13 +10,21 @@ import { take } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  afUser$: Observable<firebase.User> = this.afAuth.user;
+  afUser: firebase.User;
+  uid: string;
   loginProcessing = false;
 
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
     private userService: UserService
-  ) { }
+  ) {
+    this.afUser$.subscribe((user) => {
+      this.uid = user.uid;
+      this.afUser = user;
+    });
+  }
 
   login(): void {
     this.loginProcessing = true;
