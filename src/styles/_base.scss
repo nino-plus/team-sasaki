@@ -16,9 +16,14 @@ body {
   height: 100%;
   margin: 0;
   font-family: $font-default;
+  background-color: #fafafa;
   .mat-dialog-container {
     @include sp {
       padding: 24px 16px;
     }
+  }
+
+  .mat-drawer-side {
+    border: none;
   }
 }
