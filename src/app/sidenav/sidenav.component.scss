@@ -19,6 +19,9 @@
   border-radius: 10px;
   padding-top: 20px;
   background-color: $color-sidenavContent;
+  @include sp {
+    width: 90%;
+  }
   &__title {
     position: absolute;
     top: 20px;

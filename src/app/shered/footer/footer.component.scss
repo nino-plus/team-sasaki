@@ -10,7 +10,7 @@ footer {
   section:first-of-type {
     @include pc {
       display: grid;
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 
@@ -39,7 +39,7 @@ footer {
 
 .developers {
   @include pc {
-    padding: 0 64px;
+    padding: 0 32px;
   }
   ul {
     padding: 0;
@@ -56,7 +56,7 @@ footer {
 
 .dev-date {
   @include pc {
-    padding: 0 64px;
+    padding: 0 32px;
   }
   p {
     font-size: 12px;
@@ -90,7 +90,7 @@ footer {
   font-family: $font-logo;
   cursor: pointer;
   @include sp {
-    font-size: 28px;
+    font-size: 24px;
   }
 }
 
