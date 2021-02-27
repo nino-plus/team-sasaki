@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,9 +11,12 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   readonly nameMaxLength = 60;
 
+  subscription: Subscription;
+  isLoading = false;
+  currentUserData: User;
   inProgress = false;
   form = this.fb.group({
     avatarURL: [''],
@@ -36,13 +40,20 @@ export class SignupComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private snackBar: MatSnackBar,
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.subscription = this.userService.user$.subscribe((currentUserData) => {
+      this.currentUserData = currentUserData;
+      this.form.patchValue(currentUserData);
+    });
   }
 
-  webhookURLValidator(formControl: AbstractControl): {webhookURLValidator: boolean} {
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  webhookURLValidator(formControl: AbstractControl): { webhookURLValidator: boolean } {
     const webhookURL: string = formControl.value;
     if (!webhookURL) {
       return null;
@@ -51,11 +62,10 @@ export class SignupComponent implements OnInit {
       .test(formControl.value) ? null : { webhookURLValidator: true } ;
   }
 
-  async onSubmit(): Promise<void> {
+  onSubmit(): void {
     this.inProgress = true;
-    const formData =  this.form.value;
-    const currentUserData = await this.userService.user$.pipe(take(1)).toPromise();
-    this.userService.updateUser(currentUserData, formData)
+    const formData = this.form.value;
+    this.userService.updateUser(this.currentUserData, formData)
       .then(() => {
         this.inProgress = false;
         this.router.navigateByUrl('/');
