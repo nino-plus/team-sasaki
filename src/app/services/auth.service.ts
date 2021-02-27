@@ -8,6 +8,7 @@ import firebase from 'firebase';
   providedIn: 'root'
 })
 export class AuthService {
+  uid: string;
   afUser$: Observable<firebase.User> = this.afAuth.user;
   afUser: firebase.User;
   loginProcessing = false;
@@ -18,6 +19,7 @@ export class AuthService {
   ) {
     this.afUser$.subscribe((user) => {
       this.afUser = user && user;
+      this.uid = user.uid;
     });
   }
 
