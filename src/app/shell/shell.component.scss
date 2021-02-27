@@ -1,38 +1,5 @@
 @import 'mixins';
 
-.main-sidenav {
+.side {
   width: 400px;
-  height: calc(100vh - 130px);
-  position: fixed;
-  top: 64px;
-  left: 0;
-  @include sp {
-    top: 56px;
-  }
-}
-
-.main {
-  width: calc(100% - 300px);
-  height: calc(100vh - 130px);
-  position: fixed;
-  top: 64px;
-  left: 0;
-  @include sp {
-    top: 56px;
-  }
-}
-
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
 }
