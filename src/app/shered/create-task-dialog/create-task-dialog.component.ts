@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from 'src/app/interfaces/task';
 import { AuthService } from 'src/app/services/auth.service';
 import { TaskService } from 'src/app/services/task.service';
-import { MatDialogRef } from '@angular/material/dialog';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
@@ -74,11 +74,6 @@ export class CreateTaskDialogComponent implements OnInit {
       detail: formData.detail,
       timeLimit: this.convertToLimitTime()
     };
-
-    if (taskData.timeLimit === 0) {
-      this.snackBar.open('時間を入力してください😧');
-      return null;
-    }
 
     this.taskService.createTask(taskData).then(() => {
       this.snackBar.open('タスクをはじめました✨');
