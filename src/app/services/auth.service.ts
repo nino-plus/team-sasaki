@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import firebase from 'firebase';
+import { UserService } from './user.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,7 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
+    private userService: UserService
   ) {
     this.afUser$.subscribe((user) => {
       this.afUser = user && user;
@@ -27,13 +30,34 @@ export class AuthService {
     this.loginProcessing = true;
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    this.afAuth.signInWithPopup(provider).catch((error) => console.error(error));
-    this.loginProcessing = false;
+    this.afAuth.signInWithPopup(provider)
+      .then((userCredential) => {
+        return this.userService.getUser(userCredential.user.uid).pipe(take(1)).toPromise();
+      })
+      .then((user) => {
+        if (user?.webhookURL) {
+          this.router.navigateByUrl('/');
+        } else {
+          this.router.navigateByUrl('/signup');
+        }
+        this.loginProcessing = false;
+      })
+      .catch((error) => {
+        console.error(error);
+        this.loginProcessing = false;
+      });
   }
 
   logout(): void {
     this.loginProcessing = true;
-    this.afAuth.signOut().then(() => this.router.navigateByUrl('/welcome')).catch((error) => console.error(error));
-    this.loginProcessing = false;
+    this.afAuth.signOut()
+      .then(() => {
+        this.router.navigateByUrl('/welcome');
+        this.loginProcessing = false;
+      })
+      .catch((error) => {
+        console.error(error);
+        this.loginProcessing = false;
+      });
   }
 }

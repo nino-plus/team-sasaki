@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../interfaces/user';
 import { shareReplay, switchMap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  user$: Observable<User> = this.authService.afUser$.pipe(
+  user$: Observable<User> = this.afAuth.user.pipe(
     switchMap((afUser) => {
       if (afUser?.uid) {
         return this.getUser(afUser.uid);
@@ -20,9 +20,16 @@ export class UserService {
     shareReplay(1)
   );
 
-  constructor(private authService: AuthService, private db: AngularFirestore) { }
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) { }
 
   getUser(uid: string): Observable<User> {
     return this.db.doc<User>(`users/${uid}`).valueChanges();
+  }
+
+  updateUser(user: User, newUserData: Partial<User>): Promise<void> {
+    return this.db.doc<User>(`users/${user.uid}`).set({
+      ...user,
+      ...newUserData
+    }, { merge: true });
   }
 }
