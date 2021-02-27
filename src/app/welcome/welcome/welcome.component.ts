@@ -8,12 +8,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  user$ = this.userService.user$;
-  afUser$ = this.authService.afUser$;
-
   constructor(
     public authService: AuthService,
-    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
