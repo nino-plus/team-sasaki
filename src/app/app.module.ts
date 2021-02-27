@@ -12,15 +12,21 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShellComponent } from './shell/shell.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { FinishDialogComponent } from './finish-dialog/finish-dialog.component';
 import { GiveupDialogComponent } from './giveup-dialog/giveup-dialog.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { SheredModule } from './shered/shered.module';
 
 @NgModule({
-  declarations: [AppComponent, ShellComponent, HeaderComponent, FooterComponent, SidenavComponent, FinishDialogComponent, GiveupDialogComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    ShellComponent,
+    SidenavComponent,
+    FinishDialogComponent,
+    GiveupDialogComponent,
+    NotFoundComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +37,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AngularFireStorageModule,
     AngularFireAuthModule,
     BrowserAnimationsModule,
+    SheredModule
   ],
   providers: [
     {
