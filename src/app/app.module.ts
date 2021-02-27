@@ -20,7 +20,16 @@ import { GiveupDialogComponent } from './giveup-dialog/giveup-dialog.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, ShellComponent, HeaderComponent, FooterComponent, SidenavComponent, FinishDialogComponent, GiveupDialogComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    ShellComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    FinishDialogComponent,
+    GiveupDialogComponent,
+    NotFoundComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,4 +49,4 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
