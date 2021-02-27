@@ -17,15 +17,11 @@ import { FinishDialogComponent } from './finish-dialog/finish-dialog.component';
 import { GiveupDialogComponent } from './giveup-dialog/giveup-dialog.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SheredModule } from './shered/shered.module';
-import { HeaderComponent } from './shered/header/header.component';
-import { FooterComponent } from './shered/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShellComponent,
-    HeaderComponent,
-    FooterComponent,
     SidenavComponent,
     FinishDialogComponent,
     GiveupDialogComponent,
