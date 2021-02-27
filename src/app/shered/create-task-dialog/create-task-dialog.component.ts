@@ -5,6 +5,7 @@ import { Task } from 'src/app/interfaces/task';
 import { AuthService } from 'src/app/services/auth.service';
 import { TaskService } from 'src/app/services/task.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -12,6 +13,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./create-task-dialog.component.scss']
 })
 export class CreateTaskDialogComponent implements OnInit {
+  isPcScreen: boolean = this.uiService.isLargeScreen();
+
   readonly TITLE_MAX_LENGTH = 30;
   readonly DETAIL_MAX_LENGTH = 60;
 
@@ -19,7 +22,7 @@ export class CreateTaskDialogComponent implements OnInit {
     title: ['', [Validators.required, Validators.maxLength(this.TITLE_MAX_LENGTH)]],
     detail: ['', Validators.maxLength(this.DETAIL_MAX_LENGTH)],
     hour: [0, [Validators.required]],
-    minutes: [0, [Validators.required]]
+    minutes: [, [Validators.required]]
   });
 
   get titleCtl(): FormControl {
@@ -40,7 +43,8 @@ export class CreateTaskDialogComponent implements OnInit {
     private fb: FormBuilder,
     private taskService: TaskService,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<CreateTaskDialogComponent>
+    private dialogRef: MatDialogRef<CreateTaskDialogComponent>,
+    private uiService: UiService
   ) { }
 
   ngOnInit(): void { }
