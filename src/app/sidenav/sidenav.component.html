@@ -1,1 +1,35 @@
-<p>sidenav works!</p>
+<div class="sidenav-wrapper">
+  <section class="task">
+    <ng-container *ngIf="Istask; else noTask">
+      <h1 class="task__title">腹筋30回</h1>
+      <mat-progress-spinner
+        class="task__spinner"
+        [diameter]="250"
+        [value]="100"
+      >
+      </mat-progress-spinner>
+      <div class="task__limit">
+        <p class="task__remaining-time">3:49</p>
+        <p class="task__limit-time">18:50</p>
+      </div>
+      <div class="task__maxim">
+        <h2 class="task__maxim-title">今日の名言</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
+          ducimus?
+        </p>
+      </div>
+      <div class="task__buttons">
+        <button class="task__button" (click)="openGiveupDialog()">
+          諦める
+        </button>
+        <button class="task__primary-btn" (click)="openFinishDialog()">
+          タスク完了！
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #noTask>
+      <h1 class="task__nothing">現在タスクは作成されていません</h1>
+    </ng-template>
+  </section>
+</div>

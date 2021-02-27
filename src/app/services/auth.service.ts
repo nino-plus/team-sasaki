@@ -10,9 +10,9 @@ import { take } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  uid: string;
   afUser$: Observable<firebase.User> = this.afAuth.user;
   afUser: firebase.User;
-  uid: string;
   loginProcessing = false;
 
   constructor(
@@ -21,8 +21,8 @@ export class AuthService {
     private userService: UserService
   ) {
     this.afUser$.subscribe((user) => {
+      this.afUser = user && user;
       this.uid = user.uid;
-      this.afUser = user;
     });
   }
 

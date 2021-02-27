@@ -1,11 +1,25 @@
 @import 'variables';
+@import 'mixins';
+
+a {
+  text-decoration: none;
+}
+
+button {
+  outline: none;
+}
 
 .header {
   background-color: $color-background;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80px;
+  height: 64px;
+  padding: 0 24px;
+  @include sp {
+    padding: 0 16px;
+    height: 56px;
+  }
 }
 
 .logo {
@@ -14,4 +28,51 @@
   font-size: 32px;
   margin: 0;
   font-family: $font-logo;
+  cursor: pointer;
+  @include sp {
+    font-size: 28px;
+  }
+}
+
+.btn-layout {
+  @include sp {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 100;
+    button {
+      border-radius: 50%;
+      padding: 10px;
+      mat-icon {
+        font-size: 28px;
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.create-task-icon,
+.mat-icon.mat-icon-inline {
+  font-size: 18px;
+  @include pc {
+    margin-right: 4px;
+  }
+}
+
+.avatar {
+  background: center/cover;
+  box-shadow: none;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  margin-left: 24px;
+  @include sp {
+    width: 40px;
+    height: 40px;
+  }
 }

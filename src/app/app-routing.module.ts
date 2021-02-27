@@ -34,13 +34,6 @@ const routes: Routes = [
         canLoad: [AuthGuard],
         canActivate: [AuthGuard],
       },
-      {
-        path: 'create',
-        loadChildren: () =>
-          import('./create/create.module').then((m) => m.CreateModule),
-        canLoad: [AuthGuard],
-        canActivate: [AuthGuard],
-      },
     ],
   },
   {
@@ -53,4 +46,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

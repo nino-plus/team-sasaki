@@ -17,7 +17,15 @@ import { FinishDialogComponent } from './finish-dialog/finish-dialog.component';
 import { GiveupDialogComponent } from './giveup-dialog/giveup-dialog.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SheredModule } from './shered/shered.module';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -26,7 +34,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     SidenavComponent,
     FinishDialogComponent,
     GiveupDialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,14 +47,25 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     AngularFireAuthModule,
     BrowserAnimationsModule,
     SheredModule,
-    MatSidenavModule
+    MatButtonModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
       provide: REGION,
       useValue: 'asia-northeast1',
     },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 2000,
+      },
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

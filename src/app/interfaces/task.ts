@@ -5,5 +5,5 @@ export interface Task {
   createdAt: firebase.default.firestore.Timestamp;
   uid: string;
   taskId: string;
-  status: string;
+  status: 'active' | 'success' | 'failure';
 }
