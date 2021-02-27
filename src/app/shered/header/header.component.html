@@ -1,4 +1,36 @@
 <div class="header">
-  <h1 class="logo">⏳️プライドタイマー</h1>
-</div>
+  <a routerLink="/">
+    <h1 class="logo">⏳️プライドタイマー</h1>
+  </a>
 
+  <span *ngIf="!isWelcomePage" class="speacer"></span>
+
+  <div *ngIf="!isWelcomePage" class="actions">
+    <!-- <ng-container *ngIf="userService.user$ | async as user"> -->
+    <div class="btn-layout">
+      <button (click)="openCreateTaskDialog()" matRipple class="primary-btn">
+        <mat-icon class="create-task-icon" inline="true">{{
+          isPcScreen ? 'add_circle_outline' : 'add'
+        }}</mat-icon>
+        <span *ngIf="isPcScreen">タスクを作成</span>
+      </button>
+    </div>
+    <button
+      class="avatar"
+      mat-mini-fab
+      [matMenuTriggerFor]="menu"
+      [style.background-image]="'url(https://dummyimage.com/400x400.png)'"
+    ></button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLink="/setting">
+        <mat-icon>settings</mat-icon>
+        <span>設定</span>
+      </a>
+      <button mat-menu-item (click)="authService.logout()">
+        <mat-icon>logout</mat-icon>
+        <span>ログアウト</span>
+      </button>
+    </mat-menu>
+    <!-- </ng-container> -->
+  </div>
+</div>

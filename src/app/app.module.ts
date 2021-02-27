@@ -17,6 +17,7 @@ import { FinishDialogComponent } from './finish-dialog/finish-dialog.component';
 import { GiveupDialogComponent } from './giveup-dialog/giveup-dialog.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SheredModule } from './shered/shered.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SheredModule } from './shered/shered.module';
     AngularFireStorageModule,
     AngularFireAuthModule,
     BrowserAnimationsModule,
-    SheredModule
+    SheredModule,
+    MatDialogModule
   ],
   providers: [
     {
