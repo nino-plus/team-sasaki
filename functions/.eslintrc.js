@@ -29,7 +29,7 @@ module.exports = {
     'constructor-super': 'error',
     eqeqeq: ['warn', 'always'],
     'import/no-deprecated': 'warn',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': 'off',
     'import/no-unassigned-import': 'warn',
     'no-cond-assign': 'error',
     'no-duplicate-case': 'error',
