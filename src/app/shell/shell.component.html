@@ -1,8 +1,10 @@
-<div class="layout">
-  <app-header class="header"></app-header>
-  <app-sidenav class="sidenav"></app-sidenav>
-  <div class="main">
+<app-header class="header"></app-header>
+<mat-sidenav-container class="main-container">
+  <mat-sidenav #sidenav mode="side" opened class="main-sidenav">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content class="main">
     <router-outlet></router-outlet>
-  </div>
-  <app-footer class="footer"></app-footer>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<app-footer class="footer"></app-footer>

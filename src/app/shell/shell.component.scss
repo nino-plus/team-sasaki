@@ -1,25 +1,29 @@
-.layout {
-  display: grid;
-  grid-template-columns: 200px auto;
-  grid-template-rows: 80px auto 100px;
-  grid-template-areas:
-    'header header'
-    'sidenav main'
-    'footer footer';
-}
-
-.header {
-  grid-area: header;
-}
-
-.sidenav {
-  grid-area: sidenav;
+.main-sidenav {
+  width: 400px;
+  height: calc(100vh - 130px);
+  position: fixed;
+  top: 80px;
+  left: 0;
 }
 
 .main {
-  grid-area: main;
+  width: calc(100% - 300px);
+  height: calc(100vh - 130px);
+  position: fixed;
+  top: 80px;
+  left: 0;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .footer {
-  grid-area: footer;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
