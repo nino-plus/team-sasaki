@@ -1,10 +1,66 @@
 <h1 matDialogTitle>タスクを作成してはじめよう！</h1>
 
 <mat-dialog-content>
-  <app-create-task></app-create-task>
+  <form [formGroup]="form" (ngSubmit)="createTask()">
+    <mat-form-field appearance="outline">
+      <mat-label>タイトル</mat-label>
+      <input matInput type="text" formControlName="title" required />
+      <mat-hint align="end" *ngIf="titleCtl.value.length">
+        {{ titleCtl.value.length }} / {{ TITLE_MAX_LENGTH }}
+      </mat-hint>
+      <mat-error *ngIf="titleCtl.hasError('required')">必須入力です</mat-error>
+      <mat-error *ngIf="titleCtl.hasError('maxlength')"
+        >{{ TITLE_MAX_LENGTH }}文字以内で入力してください</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>説明</mat-label>
+      <textarea
+        matTextareaAutosize
+        matInput
+        type="text"
+        formControlName="detail"
+      ></textarea>
+      <mat-hint align="end" *ngIf="detailCtl.value.length">
+        {{ detailCtl.value.length }} / {{ DETAIL_MAX_LENGTH }}
+      </mat-hint>
+      <mat-error *ngIf="detailCtl.hasError('maxlength')"
+        >{{ DETAIL_MAX_LENGTH }}文字以内で入力してください</mat-error
+      >
+    </mat-form-field>
+
+    <div class="selectors">
+      <mat-form-field appearance="outline">
+        <mat-label>時間</mat-label>
+        <mat-select formControlName="hour" required>
+          <mat-option *ngFor="let hour of hours; index as i" [value]="i">{{
+            i === 0 ? '-' : i + '時間'
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>分</mat-label>
+        <mat-select formControlName="minutes" required>
+          <mat-option *ngFor="let time of minutes; index as i" [value]="i">{{
+            i === 0 ? '-' : i * convertToMinutesNumber + '分'
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
 </mat-dialog-content>
 
 <mat-dialog-actions class="actions">
   <button mat-button matDialogClose>キャンセル</button>
-  <button class="primary-btn" mat-button>スタートする！</button>
+  <button
+    (click)="createTask()"
+    [class.disabled]="form.invalid"
+    [disabled]="form.invalid"
+    class="primary-btn"
+    mat-button
+  >
+    スタートする！
+  </button>
 </mat-dialog-actions>

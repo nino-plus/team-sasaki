@@ -22,12 +22,12 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.openCreateTaskDialog();
   }
 
   openCreateTaskDialog(): void {
     this.dialog.open(CreateTaskDialogComponent, {
       width: '1200px',
-      height: this.isPcScreen ? '720px' : 'auto',
       autoFocus: false
     });
   }

@@ -7,15 +7,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { MatRippleModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-import { CreateTaskComponent } from './create-task/create-task.component';
 import { CreateTaskDialogComponent } from './create-task-dialog/create-task-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    CreateTaskComponent,
     CreateTaskDialogComponent,
   ],
   imports: [
@@ -25,6 +28,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     RouterModule,
     MatRippleModule,
     MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
     MatDialogModule
   ],
   exports: [
