@@ -4,7 +4,13 @@
   <form [formGroup]="form" (ngSubmit)="createTask()">
     <mat-form-field appearance="outline">
       <mat-label>タイトル</mat-label>
-      <input matInput type="text" formControlName="title" required />
+      <input
+        (change)="(isTimeValid)"
+        matInput
+        type="text"
+        formControlName="title"
+        required
+      />
       <mat-hint align="end" *ngIf="titleCtl.value.length">
         {{ titleCtl.value.length }} / {{ TITLE_MAX_LENGTH }}
       </mat-hint>
@@ -50,6 +56,9 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <p [class.select-error--valid]="isTimeValid" class="select-error">
+      時間を設定してください🥺
+    </p>
   </form>
 </mat-dialog-content>
 
@@ -57,8 +66,8 @@
   <button mat-button matDialogClose>キャンセル</button>
   <button
     (click)="createTask()"
-    [class.disabled]="form.invalid"
-    [disabled]="form.invalid"
+    [class.disabled]="form.invalid || isTimeValid"
+    [disabled]="form.invalid || isTimeValid"
     class="primary-btn"
     mat-button
   >

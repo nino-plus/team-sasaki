@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from 'src/app/interfaces/task';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,7 +22,7 @@ export class CreateTaskDialogComponent implements OnInit {
     title: ['', [Validators.required, Validators.maxLength(this.TITLE_MAX_LENGTH)]],
     detail: ['', Validators.maxLength(this.DETAIL_MAX_LENGTH)],
     hour: [0, [Validators.required]],
-    minutes: [, [Validators.required]]
+    minutes: [1, [Validators.required]]
   });
 
   get titleCtl(): FormControl {
@@ -33,10 +33,12 @@ export class CreateTaskDialogComponent implements OnInit {
     return this.form.get('detail') as FormControl;
   }
 
-  hours = new Array(9).fill(null);
+  hours = new Array(8).fill(null);
   minutes = new Array(12).fill(null);
   readonly convertToHourNumber = 60;
   readonly convertToMinutesNumber = 5;
+
+  isTimeValid: boolean;
 
   constructor(
     private authService: AuthService,
@@ -47,7 +49,15 @@ export class CreateTaskDialogComponent implements OnInit {
     private uiService: UiService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe(group => {
+      if ((group.hour === 0) && (group.minutes === 0)) {
+        this.isTimeValid = true;
+      } else {
+        this.isTimeValid = false;
+      }
+    });
+  }
 
   convertToLimitTime(): number {
     const formData = this.form.value;
@@ -64,6 +74,12 @@ export class CreateTaskDialogComponent implements OnInit {
       detail: formData.detail,
       timeLimit: this.convertToLimitTime()
     };
+
+    if (taskData.timeLimit === 0) {
+      this.snackBar.open('時間を入力してください😧');
+      return null;
+    }
+
     this.taskService.createTask(taskData).then(() => {
       this.snackBar.open('タスクをはじめました✨');
       this.dialogRef.close();
