@@ -17,6 +17,9 @@ import { FinishDialogComponent } from './finish-dialog/finish-dialog.component';
 import { GiveupDialogComponent } from './giveup-dialog/giveup-dialog.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SheredModule } from './shered/shered.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,7 @@ import { SheredModule } from './shered/shered.module';
     SidenavComponent,
     FinishDialogComponent,
     GiveupDialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,10 @@ import { SheredModule } from './shered/shered.module';
     AngularFireStorageModule,
     AngularFireAuthModule,
     BrowserAnimationsModule,
-    SheredModule
+    SheredModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {
