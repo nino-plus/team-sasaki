@@ -1,5 +1,11 @@
 @import 'mixins';
 
+h1 {
+  @include sp {
+    font-size: 16px;
+  }
+}
+
 form {
   mat-form-field {
     width: 100%;
@@ -13,8 +19,22 @@ form {
 .selectors {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  @include pc {
-    gap: 24px;
+  gap: 24px;
+  @include sp {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+}
+
+.select-error {
+  margin: -16px 0 0 8px;
+  color: red;
+  font-size: 75%;
+  opacity: 0;
+  transform: translateY(-80%);
+  transition: 0.5s;
+  &--valid {
+    opacity: 1;
+    transform: translateY(0%);
   }
 }
