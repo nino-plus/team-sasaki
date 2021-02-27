@@ -43,6 +43,7 @@
       <mat-form-field appearance="outline">
         <mat-label>分</mat-label>
         <mat-select formControlName="minutes" required>
+          <mat-option [value]="0.02">6秒（開発用）</mat-option>
           <mat-option *ngFor="let time of minutes; index as i" [value]="i">{{
             i === 0 ? '-' : i * convertToMinutesNumber + '分'
           }}</mat-option>
