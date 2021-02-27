@@ -28,9 +28,7 @@
   },
   "eslintIgnore": [
     "/.eslintrc.js",
-    "lib/discord.function.js",
-    "lib/index.js",
-    "lib/user.function.js"
+    "lib/**"
   ],
   "private": true
 }
