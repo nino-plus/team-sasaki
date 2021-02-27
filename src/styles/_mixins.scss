@@ -3,3 +3,8 @@
     @content;
   }
 }
+@mixin pc {
+  @media screen and (min-width: 701px) {
+    @content;
+  }
+}
