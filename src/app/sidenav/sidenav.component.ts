@@ -19,9 +19,7 @@ export class SidenavComponent implements OnInit {
     const dialogRef = this.dialog.open(GiveupDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.snackBar.open('タスクを諦めました😭', null, {
-          duration: 2000,
-        });
+        this.snackBar.open('タスクを諦めました😭');
       }
     });
   }
@@ -29,9 +27,7 @@ export class SidenavComponent implements OnInit {
     const dialogRef = this.dialog.open(FinishDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.snackBar.open('タスクを完了しました🎉', null, {
-          duration: 2000,
-        });
+        this.snackBar.open('タスクを完了しました🎉');
       }
     });
   }
