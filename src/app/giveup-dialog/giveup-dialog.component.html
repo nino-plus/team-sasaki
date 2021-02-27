@@ -1,1 +1,10 @@
-<p>giveup-dialog works!</p>
+<div class="wrapper">
+  <h2 mat-dialog-title>タスク終了</h2>
+  <mat-dialog-content class="mat-typography">
+    <p>本当に諦めますか？</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close>キャンセル</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>諦める</button>
+  </mat-dialog-actions>
+</div>

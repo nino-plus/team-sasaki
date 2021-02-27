@@ -20,8 +20,12 @@
         </p>
       </div>
       <div class="task__buttons">
-        <button class="task__button">諦める</button>
-        <button class="task__primary-btn">タスク完了！</button>
+        <button class="task__button" (click)="openGiveupDialog()">
+          諦める
+        </button>
+        <button class="task__primary-btn" (click)="openFinishDialog()">
+          タスク完了！
+        </button>
       </div>
     </ng-container>
     <ng-template #noTask>
