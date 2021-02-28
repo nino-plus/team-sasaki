@@ -3,6 +3,9 @@
 
 .profile {
   padding: 32px 80px;
+  @include sp {
+    padding: 32px 16px;
+  }
   &__wrap {
     display: flex;
     align-items: end;
