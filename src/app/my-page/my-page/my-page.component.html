@@ -1,54 +1,84 @@
-<section class="profile" *ngIf="user$ | async as user">
-  <div class="container">
-    <div class="profile__wrap">
-      <div class="profile__image">
-        <div
-          class="profile__background-image"
-          [style.background-image]="'url(' + user.avatarURL + ')'"
-        ></div>
-        <div class="profile__button-wrapper">
-          <label class="profile__button">
-            <mat-icon inline="true" class="mat-18">add_a_photo</mat-icon>
-            <input
-              class="profile__file"
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              (change)="openCropDialog($event)"
-              #imageSelecter
-            />
-          </label>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="プロフィール編集">
+    <section class="profile" *ngIf="user$ | async as user">
+      <div class="container">
+        <div class="profile__wrap">
+          <div class="profile__image">
+            <div
+              class="profile__background-image"
+              [style.background-image]="'url(' + user.avatarURL + ')'"
+            ></div>
+            <div class="profile__button-wrapper">
+              <label class="profile__button">
+                <mat-icon inline="true" class="mat-18">add_a_photo</mat-icon>
+                <input
+                  class="profile__file"
+                  type="file"
+                  accept=".png, .jpg, .jpeg"
+                  (change)="openCropDialog($event)"
+                  #imageSelecter
+                />
+              </label>
+            </div>
+          </div>
+
+          <form [formGroup]="form" class="profile-form">
+            <mat-form-field>
+              <mat-label>ユーザー名</mat-label>
+              <input
+                matInput
+                formControlName="userName"
+                (change)="nameChanged()"
+              />
+              <mat-error *ngIf="form.get('userName').hasError('required')">
+                ユーザー名を入力してください
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Discord WebHook URL</mat-label>
+              <input matInput formControlName="webHookURL" type="text" />
+              <mat-hint
+                >DiscordからWebHook URLを作成して入力してください</mat-hint
+              >
+              <mat-error *ngIf="form.get('webHookURL').hasError('required')">
+                DiscordのWebHook URLを入力してください
+              </mat-error>
+            </mat-form-field>
+            <button
+              class="profile-form__button"
+              [disabled]="form.invalid || form.pristine"
+              mat-raised-button
+              (click)="updateUserName()"
+            >
+              保存する
+            </button>
+          </form>
+        </div>
+        <div class="delete-user">
+          <button mat-button (click)="openDeleteUserDialog()">
+            退会はこちら
+          </button>
         </div>
       </div>
-
-      <form [formGroup]="form" class="profile-form">
-        <mat-form-field>
-          <mat-label>ユーザー名</mat-label>
-          <input matInput formControlName="userName" (change)="nameChanged()" />
-          <mat-error *ngIf="form.get('userName').hasError('required')">
-            ユーザー名を入力してください
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Discord WebHook URL</mat-label>
-          <input matInput formControlName="webHookURL" type="text" />
-          <mat-hint>DiscordからWebHook URLを作成して入力してください</mat-hint>
-          <mat-error *ngIf="form.get('webHookURL').hasError('required')">
-            DiscordのWebHook URLを入力してください
-          </mat-error>
-        </mat-form-field>
-        <button
-          class="profile-form__button"
-          [disabled]="form.invalid || form.pristine"
-          mat-raised-button
-          (click)="updateUserName()"
-        >
-          保存する
-        </button>
-      </form>
+    </section>
+  </mat-tab>
+  <mat-tab label="クリアしたタスク一覧">
+    <div class="container">
+      <div class="task-layout">
+        <ng-container *ngFor="let task of taskService.successTasks$ | async">
+          <app-task-card [task]="task"></app-task-card>
+        </ng-container>
+      </div>
     </div>
-    <div class="delete-user">
-      <button mat-button (click)="openDeleteUserDialog()">退会はこちら</button>
+  </mat-tab>
+  <mat-tab label="失敗したタスク一覧">
+    <div class="container">
+      <div class="task-layout">
+        <ng-container *ngFor="let task of taskService.failureTasks$ | async">
+          <app-task-card [task]="task"></app-task-card>
+        </ng-container>
+      </div>
     </div>
-  </div>
-</section>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,10 @@
+<div class="task-card">
+  <h3 class="task-card__title">{{ task.title }}</h3>
+  <div class="task-card__contents">
+    <p class="task-card__detail">{{ task.detail }}</p>
+    <span class="task-card__limit">設定した時間：{{ task.timeLimit }}分</span>
+    <span class="task-card__create"
+      >作成日：{{ task.createdAt.toDate() | date: 'yyyy/M/d HH:mm' }}</span
+    >
+  </div>
+</div>

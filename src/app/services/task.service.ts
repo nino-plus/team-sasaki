@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Task } from '../interfaces/task';
-import firebase from 'firebase';
-import { Observable, of } from 'rxjs';
-import { AuthService } from './auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { switchMap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import firebase from 'firebase';
+import { Observable } from 'rxjs';
+import { Task } from '../interfaces/task';
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
+  failureTasks$: Observable<Task[]> = this.getTaskWithStatusFailure();
+  successTasks$: Observable<Task[]> = this.getTaskWithStatusSuccess();
+
   constructor(
     private db: AngularFirestore,
     private authService: AuthService,
     public afAuth: AngularFireAuth
-  ) {}
+  ) { }
 
   getActiveTask() {
     return this.db
@@ -48,5 +50,25 @@ export class TaskService {
     return this.db.doc(`tasks/${taskId}`).update({
       status: 'success',
     });
+  }
+
+  getTaskWithStatusFailure(): Observable<Task[]> {
+    return this.db
+      .collection<Task>('tasks', (ref) =>
+        ref
+          .where('uid', '==', this.authService.uid)
+          .where('status', '==', 'failure')
+      )
+      .valueChanges();
+  }
+
+  getTaskWithStatusSuccess(): Observable<Task[]> {
+    return this.db
+      .collection<Task>('tasks', (ref) =>
+        ref
+          .where('uid', '==', this.authService.uid)
+          .where('status', '==', 'success')
+      )
+      .valueChanges();
   }
 }
