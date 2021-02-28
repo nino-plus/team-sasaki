@@ -13,7 +13,7 @@ export const createUser = functions
       email: user.email,
       point: 0,
       latestCreatedTaskDate: admin.firestore.Timestamp.now(),
-    });
+    }, {merge: true});
   });
 
 export const addPoint = functions
