@@ -66,9 +66,7 @@ export class MyPageComponent implements OnInit, OnDestroy {
       .then(() => {
         this.router.navigateByUrl('/welcome');
         this.authService.afAuth.signOut().then(() => {
-          this.snackBar.open('退会しました', null, {
-            duration: 2000,
-          });
+          this.snackBar.open('退会しました');
         });
       });
   }
