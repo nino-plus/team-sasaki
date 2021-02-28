@@ -1,17 +1,17 @@
 <div class="wrapper">
   <h2 mat-dialog-title>タスク終了</h2>
   <mat-dialog-content class="mat-typography">
-    <p>タスクを完了しますか？</p>
+    <p>タスクは終わりましたか？</p>
   </mat-dialog-content>
   <mat-dialog-actions align="center">
-    <button mat-button mat-dialog-close>キャンセル</button>
+    <button mat-button mat-dialog-close>まだまだ</button>
     <button
+      class="primary-btn"
       mat-button
       (click)="success()"
       [mat-dialog-close]="true"
-      cdkFocusInitial
     >
-      タスク完了
+      終わった！！
     </button>
   </mat-dialog-actions>
 </div>
