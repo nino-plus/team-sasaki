@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GiveupDialogComponent } from '../giveup-dialog/giveup-dialog.component';
 import { FinishDialogComponent } from '../finish-dialog/finish-dialog.component';
@@ -6,12 +6,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from '../services/task.service';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable, Subscription } from 'rxjs';
+import { MeigenService } from '../services/meigen.service';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit, OnDestroy {
   activeTask;
   limitTime: string;
   timeLimitDate;
@@ -24,29 +25,33 @@ export class SidenavComponent implements OnInit {
       clearInterval(interval);
     };
   });
-  subscription: Subscription;
+  subscriptions = new Subscription();
   time: number;
+  meigen = this.meigenService.getRandomMeigen();
 
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private taskService: TaskService,
-    private afn: AngularFireFunctions
+    private afn: AngularFireFunctions,
+    private meigenService: MeigenService
   ) {}
 
   ngOnInit(): void {
-    this.taskService.getActiveTask().subscribe((tasks) => {
+    const taskSub = this.taskService.getActiveTask().subscribe((tasks) => {
       if (tasks) {
         this.activeTask = tasks[0];
-        this.subscription = this.timer$.subscribe((date) => {
+        const timerSub = this.timer$.subscribe((date) => {
           this.calculateRemainingSeconds(date);
         });
+        this.subscriptions.add(timerSub);
       }
     });
+    this.subscriptions.add(taskSub);
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   calculateRemainingSeconds(date: number) {
