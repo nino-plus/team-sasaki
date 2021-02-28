@@ -12,9 +12,20 @@
   }
 }
 
-.white-button {
+.white-btn {
   color: $color-font-black;
   background-color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: $font-default;
+  background-image: linear-gradient(45deg, $color-main 50%, transparent 50%);
+  background-position: 100%;
+  background-size: 400%;
+  transition: background 0.4s ease-in-out;
+  &:hover {
+		background-position: 0;
+		color: $color-font-white;
+	}
 }
 
 .speacer {
@@ -32,4 +43,17 @@
   font-weight: 500;
   font-size: 14px;
   font-family: $font-default;
+}
+
+.fade {
+  animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
