@@ -20,6 +20,15 @@
   @include sp {
     width: 320px;
   }
+
+  &__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    mat-icon {
+      color: #fafafa;
+    }
+  }
 }
 
 .menu-btn {

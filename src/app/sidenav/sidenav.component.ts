@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GiveupDialogComponent } from '../giveup-dialog/giveup-dialog.component';
 import { FinishDialogComponent } from '../finish-dialog/finish-dialog.component';
@@ -11,7 +11,7 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit, OnDestroy {
   activeTask;
   limitTime: string;
   timeLimitDate;
@@ -32,7 +32,7 @@ export class SidenavComponent implements OnInit {
     private snackBar: MatSnackBar,
     private taskService: TaskService,
     private afn: AngularFireFunctions
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.taskService.getActiveTask().subscribe((tasks) => {
@@ -45,11 +45,11 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  calculateRemainingSeconds(date: number) {
+  calculateRemainingSeconds(date: number): Promise<void> {
     if (this.activeTask) {
       const timeLimitNum =
         this.activeTask.timeLimit * 60000 +
@@ -77,9 +77,10 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  openGiveupDialog() {
+  openGiveupDialog(): void {
     const dialogRef = this.dialog.open(GiveupDialogComponent, {
       data: { taskId: this.activeTask.taskId },
+      autoFocus: false
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -87,9 +88,11 @@ export class SidenavComponent implements OnInit {
       }
     });
   }
-  openFinishDialog() {
+
+  openFinishDialog(): void {
     const dialogRef = this.dialog.open(FinishDialogComponent, {
       data: { taskId: this.activeTask.taskId },
+      autoFocus: false
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

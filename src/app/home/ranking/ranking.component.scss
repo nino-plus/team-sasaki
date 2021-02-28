@@ -2,6 +2,14 @@
 @import 'variables';
 @import '~@angular/material/theming';
 
+.ranking-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .ranking-layout {
   padding: 40px 0;
   display: flex;
@@ -22,7 +30,7 @@ mat-card-title {
 .worst {
   position: relative;
   width: 100%;
-  padding: 0 24px 24px 24px;
+  padding: 0 16px 24px 16px;
   border-radius: 4px;
   background-color: #fff;
   overflow: hidden;
@@ -38,7 +46,7 @@ mat-card-title {
     font-size: 32px;
     font-weight: 800;
     margin: 0;
-    padding: 0 24px 2px 24px;
+    padding: 0 16px 2px 16px;
     color: $color-font-white;
     div {
       span:first-of-type {
@@ -56,7 +64,10 @@ mat-card-title {
   &__users {
     display: grid;
     gap: 24px;
-    padding-top: 66px;
+    padding-top: 80px;
+    @include sp {
+      padding-top: 102px;
+    }
   }
 }
 

@@ -7,6 +7,14 @@
     [mode]="isPcScreen ? 'side' : 'hide'"
     opened
   >
+    <button
+      (click)="sidenav.toggle()"
+      *ngIf="!isPcScreen"
+      class="side__close"
+      mat-icon-button
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
     <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
