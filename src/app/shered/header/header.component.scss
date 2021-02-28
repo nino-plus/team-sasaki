@@ -10,7 +10,7 @@ button {
 }
 
 .header {
-  background-color: $color-background;
+  background-color: $color-sub;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,7 @@ button {
   font-family: $font-logo;
   cursor: pointer;
   @include sp {
-    font-size: 28px;
+    font-size: 24px;
   }
 }
 

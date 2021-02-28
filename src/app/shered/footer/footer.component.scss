@@ -1,0 +1,98 @@
+@import 'variables';
+@import 'mixins';
+
+footer {
+  background-color: $color-background;
+  padding: 0 24px;
+  @include sp {
+    padding: 0 16px;
+  }
+  section:first-of-type {
+    @include pc {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+
+  h3 {
+    color: $color-main;
+  }
+}
+
+.github {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: auto;
+  p {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+    color: $color-main;
+  }
+  a {
+    display: inline-block;
+  }
+  &__icon {
+    width: 32px;
+  }
+}
+
+.developers {
+  @include pc {
+    margin-right: 64px;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 4px;
+  }
+  li {
+    font-size: 12px;
+    color: $color-font-white;
+    list-style: none;
+  }
+}
+
+.dev-date {
+  p {
+    font-size: 12px;
+    color: $color-font-white;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  margin: 32px 0;
+  background-color: $color-main;
+}
+
+.under {
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.logo {
+  color: $color-font-white;
+  font-size: 32px;
+  margin: 0;
+  font-family: $font-logo;
+  cursor: pointer;
+  @include sp {
+    font-size: 24px;
+  }
+}
+
+.copy {
+  color: #fff;
+  opacity: 0.6;
+  font-size: 12px;
+}
