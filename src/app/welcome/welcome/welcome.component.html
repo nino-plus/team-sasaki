@@ -7,7 +7,7 @@
       Googleアカウントでログイン
     </button>
     <div class="hero__img-skelton" *ngIf="isLoadingImg"></div>
-    <img class="hero__img fade" src="assets/img/hero.png" alt="" (load)="isLoadingImg = false">
+    <img class="hero__img fade" src="assets/images/hero.png" alt="" (load)="isLoadingImg = false">
   </div>
   <div class="usage-wrapper">
     <div class="usage">
@@ -19,18 +19,23 @@
             <p class="usage-steps__text">{{ step }}</p>
           </div>
           <figure class="usage-steps__img-wrapper">
-            <img src="assets/img/step-{{ i + 1 }}.png" alt="" class="usage-steps__img usage-steps__img--{{i + 1}}">
+            <img src="assets/images/step-{{ i + 1 }}.png" alt="" class="usage-steps__img usage-steps__img--{{i + 1}}">
           </figure>
         </div>
       </div>
     </div>
   </div>
   <div class="last-recommend">
-    <h1 class="last-recommend__title">今に集中するために</h1>
-    <p class="last-recommend__lead">ログインして試してみよう</p>
-    <button mat-flat-button class="last-recommend__btn white-btn" (click)="authService.login()">
-      Googleアカウントでログイン
-    </button>
+    <div class="last-recommend__glitter">
+      <img src="assets/images/glitter.svg" alt="">
+    </div>
+    <div class="last-recommend__content">
+      <h2 class="last-recommend__title">今に集中するために...</h2>
+      <p class="last-recommend__lead">ログインして試してみよう</p>
+      <button mat-flat-button class="last-recommend__btn white-btn" (click)="authService.login()">
+        Googleアカウントでログイン
+      </button>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

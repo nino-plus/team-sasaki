@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 24px;
+  padding: 60px 24px;
   letter-spacing: 1.2px;
   background-color: $color-background;
   @include sp {
@@ -48,9 +48,8 @@
 }
 .usage-wrapper {
   background-color: #fff;
-  margin-top: -20vh;
-  padding-top: 20vh;
-  margin-bottom: 60px;
+  margin: -20vh 0;
+  padding: 20vh 0;
   transform: skewY(-4deg);
 }
 .usage {
@@ -118,23 +117,57 @@
     font-weight: bold
   }
   &__img-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     max-width: 400px;
     margin: 0 auto;
   }
   &__img {
+    margin: 24px 0;
     &--1 {
       width: 80%;
     }
     &--2 {
       width: 100%;
     }
+    &--3 {
+      width: 60%;
+    }
+    &--4 {
+      width: 40%;
+    }
   }
 }
 
 .last-recommend {
+  position: relative;
   background-color: $color-background;
-  padding: 60px 0;
+  padding: 80px 0;
+  &__glitter {
+    position: absolute;
+    overflow: hidden;
+    left: 28%;
+    top: 48px;
+    @include sp {
+      left: 10%;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &__content {
+    position: relative;
+  }
+  &__title {
+    font-size: 24px;
+  }
+  &__lead {
+    font-size: 16px;
+    opacity: 70%;
+    @include sp {
+      font-size: 14px;
+    }
+  }
+  &__btn {
+    padding: 4px 32px;
+    margin: 24px 0;
+  }
 }
