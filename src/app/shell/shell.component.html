@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="wrapper">
   <mat-sidenav
     class="side"
     fixedInViewport
@@ -28,9 +28,11 @@
         <mat-icon inlne="true">menu</mat-icon>
       </button>
     </app-header>
-    <div class="main">
-      <router-outlet></router-outlet>
+    <div class="grid">
+      <div class="main">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer class="footer"></app-footer>
     </div>
-    <app-footer class="footer"></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
