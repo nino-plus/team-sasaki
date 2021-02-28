@@ -1,14 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-crop',
   templateUrl: './crop.component.html',
-  styleUrls: ['./crop.component.scss'],
+  styleUrls: ['./crop.component.scss']
 })
 export class CropComponent implements OnInit {
   imageChangedEvent = '';
@@ -19,7 +19,7 @@ export class CropComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.imageChangedEvent = this.data.event;

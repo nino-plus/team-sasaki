@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SettingRoutingModule } from './setting-routing.module';
-import { SettingComponent } from './setting/setting.component';
+import { MyPageRoutingModule } from './my-page-routing.module';
+import { MyPageComponent } from './my-page/my-page.component';
+import { CropComponent } from './crop/crop.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CropComponent } from './crop/crop.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
+
 @NgModule({
-  declarations: [SettingComponent, CropComponent],
+  declarations: [MyPageComponent, CropComponent],
   imports: [
     CommonModule,
-    SettingRoutingModule,
+    MyPageRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -25,6 +26,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-  ],
+  ]
 })
-export class SettingModule {}
+export class MyPageModule { }
