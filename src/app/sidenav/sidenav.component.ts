@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from '../services/task.service';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable, Subscription } from 'rxjs';
+import { MeigenService } from '../services/meigen.service';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -24,29 +25,33 @@ export class SidenavComponent implements OnInit, OnDestroy {
       clearInterval(interval);
     };
   });
-  subscription: Subscription;
+  subscriptions = new Subscription();
   time: number;
+  meigen = this.meigenService.getRandomMeigen();
 
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private taskService: TaskService,
-    private afn: AngularFireFunctions
-  ) { }
+    private afn: AngularFireFunctions,
+    private meigenService: MeigenService
+  ) {}
 
   ngOnInit(): void {
-    this.taskService.getActiveTask().subscribe((tasks) => {
+    const taskSub = this.taskService.getActiveTask().subscribe((tasks) => {
       if (tasks) {
         this.activeTask = tasks[0];
-        this.subscription = this.timer$.subscribe((date) => {
+        const timerSub = this.timer$.subscribe((date) => {
           this.calculateRemainingSeconds(date);
         });
+        this.subscriptions.add(timerSub);
       }
     });
+    this.subscriptions.add(taskSub);
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   calculateRemainingSeconds(date: number): Promise<void> {
