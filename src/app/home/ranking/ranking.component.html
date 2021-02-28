@@ -12,7 +12,8 @@
         <app-rank-card
           *ngFor="let user of userService.bestUsers$ | async; index as i"
           [user]="user"
-          [rankingNumber]="i"
+          [rankingNumber]="i + 1"
+          [rankingType]="'best'"
         ></app-rank-card>
       </div>
     </div>
@@ -29,7 +30,8 @@
         <app-rank-card
           *ngFor="let user of userService.worstUsers$ | async; index as i"
           [user]="user"
-          [rankingNumber]="i"
+          [rankingNumber]="i + 1"
+          [rankingType]="'worst'"
         ></app-rank-card>
       </div>
     </div>

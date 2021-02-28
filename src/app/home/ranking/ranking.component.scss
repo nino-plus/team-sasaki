@@ -54,6 +54,8 @@ mat-card-title {
     font-size: 16px;
   }
   &__users {
+    display: grid;
+    gap: 24px;
     padding-top: 66px;
   }
 }
