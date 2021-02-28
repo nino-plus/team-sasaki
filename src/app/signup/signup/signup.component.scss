@@ -1,5 +1,8 @@
+@import 'common';
+
 .signup {
   &__title {
+    font-size: 28px;
     text-align: center;
   }
 }
@@ -11,5 +14,16 @@
   margin: 40px auto;
   > mat-form-field {
     margin-bottom: 16px;
+  }
+  &__submit {
+    padding: 4px 32px;
+    margin: 24px 0;
+    background-color: $color-sub;
+    border: none;
+    border-radius: 4px;
+    color: $color-font-white;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: $font-default;
   }
 }

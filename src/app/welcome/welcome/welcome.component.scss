@@ -1,12 +1,173 @@
 @import 'common';
 
 .welcome {
-  background-color: $color-background;
-  text-align: center;
-  padding: 60px 16px;
   color: $color-font-white;
+  text-align: center;
+  letter-spacing: 1.2px;
 }
 
-.catch-title {
-  margin: 0;
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 24px;
+  letter-spacing: 1.2px;
+  background-color: $color-background;
+  @include sp {
+    padding: 24px 16px;
+  }
+  &__title {
+    font-size: 48px;
+    margin: 0;
+    @include sp {
+      font-size: 40px;
+    }
+  }
+  &__lead {
+    font-size: 20px;
+    opacity: 70%;
+    @include sp {
+      font-size: 16px;
+    }
+  }
+  &__btn {
+    padding: 4px 32px;
+    margin: 24px 0;
+  }
+  &__img-skelton {
+    width: 100%;
+    height: 400px;
+    background-color: $color-background;
+  }
+  &__img {
+    margin-top: 40px;
+    width: 400px;
+    max-width: 100%;
+    z-index: 1;
+  }
+}
+.usage-wrapper {
+  background-color: #fff;
+  margin: -20vh 0;
+  padding: 20vh 0;
+  transform: skewY(-4deg);
+}
+.usage {
+  transform: skewY(4deg);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  letter-spacing: 1.2px;
+  color: $color-font-black;
+  @include sp {
+    padding: 24px 16px;
+  }
+  &__title {
+    position: relative;
+    font-size: 36px;
+    padding-bottom: 28px;
+    margin:0 0 60px;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 60px;
+      height: 5px;
+      transform: translateX(-50%);
+      background-color: $color-main;
+      border-radius: 2px;
+    }
+  }
+}
+
+.usage-steps {
+  &__item + &__item {
+    margin-top: 48px;
+  }
+  &__item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    @include sp {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__content {
+    display: flex;
+    @include sp {
+      width: 350px;
+      margin: 0 auto;
+    }
+  }
+  &__num {
+    color: $color-font-white;
+    display: block;
+    text-align: center;
+    line-height: 32px;
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: $color-sub;
+  }
+  &__text {
+    margin: 4px 8px;
+    white-space: pre-wrap;
+    text-align: start;
+    line-height: 1.5;
+    font-weight: bold
+  }
+  &__img-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  &__img {
+    margin: 24px 0;
+    &--1 {
+      width: 80%;
+    }
+    &--2 {
+      width: 100%;
+    }
+    &--3 {
+      width: 60%;
+    }
+    &--4 {
+      width: 40%;
+    }
+  }
+}
+
+.last-recommend {
+  position: relative;
+  background-color: $color-background;
+  padding: 80px 0;
+  &__glitter {
+    position: absolute;
+    overflow: hidden;
+    left: 28%;
+    top: 48px;
+    @include sp {
+      left: 10%;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &__content {
+    position: relative;
+  }
+  &__title {
+    font-size: 24px;
+  }
+  &__lead {
+    font-size: 16px;
+    opacity: 70%;
+    @include sp {
+      font-size: 14px;
+    }
+  }
+  &__btn {
+    padding: 4px 32px;
+    margin: 24px 0;
+  }
 }

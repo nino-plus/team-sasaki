@@ -44,8 +44,10 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.userService.user$.subscribe((currentUserData) => {
-      this.currentUserData = currentUserData;
-      this.form.patchValue(currentUserData);
+      if (currentUserData) {
+        this.currentUserData = currentUserData;
+        this.form.patchValue(currentUserData);
+      }
     });
   }
 

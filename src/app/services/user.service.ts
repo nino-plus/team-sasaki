@@ -5,6 +5,7 @@ import { shareReplay, switchMap, take } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,12 +27,15 @@ export class UserService {
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private authService: AuthService,
   ) { }
 
   updateUser(user: Partial<User>): Promise<void> {
-    return this.db.doc<Partial<User>>(`users/${user.uid}`).set(
+    const uid = this.authService.uid;
+    return this.db.doc(`users/${uid}`).set(
       {
+        uid,
         ...user,
       },
       { merge: true }
@@ -50,7 +54,7 @@ export class UserService {
       .valueChanges();
   }
 
-  async updateAvatar(uid: string, base64Image: string) {
+  async updateAvatar(uid: string, base64Image: string): Promise<void> {
     const ref = this.storage.ref(`users/${uid}`);
     const uploadTask = await ref.putString(base64Image, 'data_url', {
       contentType: 'image/png',
@@ -62,7 +66,7 @@ export class UserService {
     });
   }
 
-  updateUserName(uid: string, newName: string) {
+  updateUserName(uid: string, newName: string): Promise<void> {
     return this.db.doc<User>(`users/${uid}`).update({
       name: newName,
     });

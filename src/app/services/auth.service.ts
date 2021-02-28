@@ -3,8 +3,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import firebase from 'firebase';
-import { UserService } from './user.service';
 import { map, take } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class AuthService {
   uid: string;
   afUser$: Observable<firebase.User> = this.afAuth.user.pipe(
     map((user) => {
-      this.uid = user.uid;
+      this.uid = user?.uid;
       return user;
     })
   );
@@ -23,7 +24,7 @@ export class AuthService {
   constructor(
     public afAuth: AngularFireAuth,
     private router: Router,
-    private userService: UserService
+    private db: AngularFirestore,
   ) {
     this.afUser$.subscribe((user) => {
       this.afUser = user && user;
@@ -37,8 +38,7 @@ export class AuthService {
     this.afAuth
       .signInWithPopup(provider)
       .then((userCredential) => {
-        return this.userService
-          .getUser(userCredential.user.uid)
+        return this.db.doc<User>(`users/${userCredential.user.uid}`).valueChanges()
           .pipe(take(1))
           .toPromise();
       })
