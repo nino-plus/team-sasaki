@@ -26,6 +26,7 @@ import {
   MatSnackBarModule,
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
 } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {
     MatSidenavModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatIconModule
   ],
   providers: [
     {
