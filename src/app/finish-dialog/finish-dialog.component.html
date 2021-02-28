@@ -5,7 +5,12 @@
   </mat-dialog-content>
   <mat-dialog-actions align="center">
     <button mat-button mat-dialog-close>キャンセル</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+    <button
+      mat-button
+      (click)="success()"
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+    >
       タスク完了
     </button>
   </mat-dialog-actions>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-rank-card',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rank-card.component.scss']
 })
 export class RankCardComponent implements OnInit {
+  @Input() user: User;
+  @Input() rankingNumber: number;
+  @Input() rankingType: 'best' | 'worst';
 
   constructor() { }
 

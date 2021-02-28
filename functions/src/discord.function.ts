@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import { db } from '.';
+import { db } from './index';
 const fetch = require('node-fetch');
 
 export const sendFailureResult = functions

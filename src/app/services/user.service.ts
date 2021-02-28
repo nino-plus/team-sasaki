@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../interfaces/user';
-import { shareReplay, switchMap } from 'rxjs/operators';
+import { shareReplay, switchMap, take } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   user$: Observable<User> = this.afAuth.user.pipe(
@@ -19,17 +20,52 @@ export class UserService {
     }),
     shareReplay(1)
   );
+  bestUsers$: Observable<User[]> = this.getBestOrWorstTenUsers('best');
+  worstUsers$: Observable<User[]> = this.getBestOrWorstTenUsers('worst');
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) { }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFirestore,
+    private storage: AngularFireStorage
+  ) {}
+
+  updateUser(user: User, newUserData: Partial<User>): Promise<void> {
+    return this.db.doc<User>(`users/${user.uid}`).set(
+      {
+        ...user,
+        ...newUserData,
+      },
+      { merge: true }
+    );
+  }
 
   getUser(uid: string): Observable<User> {
     return this.db.doc<User>(`users/${uid}`).valueChanges();
   }
 
-  updateUser(user: User, newUserData: Partial<User>): Promise<void> {
-    return this.db.doc<User>(`users/${user.uid}`).set({
-      ...user,
-      ...newUserData
-    }, { merge: true });
+  getBestOrWorstTenUsers(type: 'best' | 'worst'): Observable<User[]> {
+    return this.db
+      .collection<User>('users', (ref) => {
+        return ref.orderBy('point', type === 'best' ? 'desc' : 'asc').limit(10);
+      })
+      .valueChanges();
+  }
+
+  async updateAvatar(uid: string, base64Image: string) {
+    const ref = this.storage.ref(`users/${uid}`);
+    const uploadTask = await ref.putString(base64Image, 'data_url', {
+      contentType: 'image/png',
+    });
+    const imageURL = await uploadTask.ref.getDownloadURL();
+
+    this.db.doc<User>(`users/${uid}`).update({
+      avatarURL: imageURL,
+    });
+  }
+
+  updateUserName(uid: string, newName: string) {
+    return this.db.doc<User>(`users/${uid}`).update({
+      name: newName,
+    });
   }
 }

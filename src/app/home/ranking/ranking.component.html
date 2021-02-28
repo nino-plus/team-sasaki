@@ -1,1 +1,39 @@
-<p>ranking works!</p>
+<div class="container">
+  <div #element class="ranking-layout" [class.ranking-layout--sp]="!isPcScreen">
+    <div class="best">
+      <h3 class="best__title">
+        <div>
+          <span>🏆</span>
+          <label>やる気もの</label>
+        </div>
+        <span class="best__ten">ベスト10</span>
+      </h3>
+      <div class="best__users">
+        <app-rank-card
+          *ngFor="let user of userService.bestUsers$ | async; index as i"
+          [user]="user"
+          [rankingNumber]="i + 1"
+          [rankingType]="'best'"
+        ></app-rank-card>
+      </div>
+    </div>
+
+    <div class="worst">
+      <h3 class="worst__title">
+        <div>
+          <span>☠️</span>
+          <label>さぼり魔</label>
+        </div>
+        <span class="worst__ten">ワースト10</span>
+      </h3>
+      <div class="worst__users">
+        <app-rank-card
+          *ngFor="let user of userService.worstUsers$ | async; index as i"
+          [user]="user"
+          [rankingNumber]="i + 1"
+          [rankingType]="'worst'"
+        ></app-rank-card>
+      </div>
+    </div>
+  </div>
+</div>

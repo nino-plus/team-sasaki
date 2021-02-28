@@ -1,38 +1,30 @@
 @import 'mixins';
 
-.main-sidenav {
-  width: 400px;
-  height: calc(100vh - 130px);
-  position: fixed;
-  top: 64px;
-  left: 0;
-  @include sp {
-    top: 56px;
-  }
-}
-
-.main {
-  width: calc(100% - 300px);
-  height: calc(100vh - 130px);
-  position: fixed;
-  top: 64px;
-  left: 0;
-  @include sp {
-    top: 56px;
-  }
-}
-
 .header {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  z-index: 10;
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
+.main {
+  padding-top: 64px;
+  @include sp {
+    padding-top: 54px;
+  }
+}
+
+.side {
+  width: 360px;
+  @include sp {
+    width: 320px;
+  }
+}
+
+.menu-btn {
+  margin-right: 8px;
+  mat-icon {
+    color: #fff;
+  }
 }

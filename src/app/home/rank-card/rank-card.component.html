@@ -1,1 +1,11 @@
-<p>rank-card works!</p>
+<div class="user user--{{ rankingType }}-{{ rankingNumber }}">
+  <img class="user__avatar" [src]="user.avatarURL" alt="" />
+  <div class="user__items">
+    <p>{{ user.name }}</p>
+    <span>{{ user.point }} Point</span>
+  </div>
+  <span *ngIf="rankingNumber === 1" class="user__rank">🥇</span>
+  <span *ngIf="rankingNumber === 2" class="user__rank">🥈</span>
+  <span *ngIf="rankingNumber === 3" class="user__rank">🥉</span>
+  <span *ngIf="rankingNumber >= 4" class="user__rank">🏅</span>
+</div>

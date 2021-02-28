@@ -1,0 +1,16 @@
+@import 'variables';
+@import 'mixins';
+
+.not-found-container {
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+  color: $color-main;
+}
+
+p {
+  text-align: center;
+}

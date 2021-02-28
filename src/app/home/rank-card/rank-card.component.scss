@@ -1,0 +1,51 @@
+@import 'mixins';
+@import 'variables';
+@import '~@angular/material/theming';
+
+.user {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: #fafafa;
+  border-radius: 4px;
+  color: #252525;
+  @include mat-elevation(4);
+
+  &--best-1 {
+    background-color: $color-main;
+    color: $color-font-white;
+  }
+
+  &--worst-1 {
+    background-color: $color-background;
+    color: $color-font-white;
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__items {
+    margin-right: auto;
+    p {
+      font-weight: 500;
+      margin: 0;
+    }
+    span {
+      opacity: 0.6;
+      font-size: 12px;
+    }
+  }
+
+  &__rank {
+    font-size: 40px;
+    height: 48px;
+    text-align: center;
+    margin-top: -6px;
+  }
+}
