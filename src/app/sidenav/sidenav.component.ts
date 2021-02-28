@@ -54,7 +54,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  calculateRemainingSeconds(date: number) {
+  calculateRemainingSeconds(date: number): Promise<void> {
     if (this.activeTask) {
       const timeLimitNum =
         this.activeTask.timeLimit * 60000 +
@@ -82,9 +82,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
     }
   }
 
-  openGiveupDialog() {
+  openGiveupDialog(): void {
     const dialogRef = this.dialog.open(GiveupDialogComponent, {
       data: { taskId: this.activeTask.taskId },
+      autoFocus: false
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -92,9 +93,11 @@ export class SidenavComponent implements OnInit, OnDestroy {
       }
     });
   }
-  openFinishDialog() {
+
+  openFinishDialog(): void {
     const dialogRef = this.dialog.open(FinishDialogComponent, {
       data: { taskId: this.activeTask.taskId },
+      autoFocus: false
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

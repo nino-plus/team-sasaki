@@ -29,7 +29,7 @@ export class UserService {
     private db: AngularFirestore,
     private storage: AngularFireStorage,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   updateUser(user: Partial<User>): Promise<void> {
     const uid = this.authService.uid;

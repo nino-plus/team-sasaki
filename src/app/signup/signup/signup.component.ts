@@ -61,7 +61,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       return null;
     }
     return /(http(s)?:\/\/discord.com\/api\/webhooks\/[a-zA-Z0-9-.!'()*;/?:@&=+$,%#-_]+)/gi
-      .test(formControl.value) ? null : { webhookURLValidator: true } ;
+      .test(formControl.value) ? null : { webhookURLValidator: true };
   }
 
   onSubmit(): void {

@@ -2,15 +2,18 @@
   <section class="task">
     <ng-container *ngIf="activeTask; else noTask">
       <h1 class="task__title">{{ activeTask.title }}</h1>
-      <mat-progress-spinner
-        class="task__spinner"
-        [diameter]="250"
-        [value]="value"
-      >
-      </mat-progress-spinner>
-      <div class="task__limit">
-        <p class="task__remaining-time">{{ limitTime }}</p>
-        <p class="task__limit-time">{{ timeLimitDate }}</p>
+      <div class="divider"></div>
+      <div class="timer">
+        <mat-progress-spinner
+          class="timer__spinner"
+          [diameter]="250"
+          [value]="value"
+        >
+        </mat-progress-spinner>
+        <div class="timer__limit">
+          <p class="timer__remaining-time">{{ limitTime }}</p>
+          <p class="timer__limit-time">{{ timeLimitDate }}</p>
+        </div>
       </div>
       <div class="task__maxim" *ngIf="meigen">
         <h2 class="task__maxim-title">今日の名言</h2>
@@ -22,7 +25,7 @@
         <button class="task__button" (click)="openGiveupDialog()">
           諦める
         </button>
-        <button class="task__primary-btn" (click)="openFinishDialog()">
+        <button class="primary-btn" (click)="openFinishDialog()">
           タスク完了！
         </button>
       </div>

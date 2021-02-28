@@ -1,41 +1,54 @@
-<div class="container">
-  <section class="profile" *ngIf="user$ | async as user">
-    <div class="profile__image">
-      <div
-        class="profile__background-image"
-        [style.background-image]="'url(' + user.avatarURL + ')'"
-      ></div>
-      <div class="profile__button-wrapper">
-        <label class="profile__button">
-          画像を変更
-          <input
-            class="profile__file"
-            type="file"
-            accept=".png, .jpg, .jpeg"
-            (change)="openCropDialog($event)"
-            #imageSelecter
-          />
-        </label>
+<section class="profile" *ngIf="user$ | async as user">
+  <div class="container">
+    <div class="profile__wrap">
+      <div class="profile__image">
+        <div
+          class="profile__background-image"
+          [style.background-image]="'url(' + user.avatarURL + ')'"
+        ></div>
+        <div class="profile__button-wrapper">
+          <label class="profile__button">
+            <mat-icon inline="true" class="mat-18">add_a_photo</mat-icon>
+            <input
+              class="profile__file"
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              (change)="openCropDialog($event)"
+              #imageSelecter
+            />
+          </label>
+        </div>
       </div>
-    </div>
 
-    <div class="profile__user">
-      <mat-form-field class="example-full-width">
-        <mat-label>ユーザー名</mat-label>
-        <input matInput [formControl]="userName" (change)="nameChanged()" />
-        <mat-error *ngIf="userName.hasError('required')">
-          ユーザー名を入力してください
-        </mat-error>
-      </mat-form-field>
-      <button
-        class="profile__nameButton"
-        [disabled]="!isUpdated"
-        mat-raised-button
-        (click)="updateUserName()"
-      >
-        ユーザー名を変更
-      </button>
+      <form [formGroup]="form" class="profile-form">
+        <mat-form-field>
+          <mat-label>ユーザー名</mat-label>
+          <input matInput formControlName="userName" (change)="nameChanged()" />
+          <mat-error *ngIf="form.get('userName').hasError('required')">
+            ユーザー名を入力してください
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Discord WebHook URL</mat-label>
+          <input matInput formControlName="webHookURL" type="text" />
+          <mat-hint>DiscordからWebHook URLを作成して入力してください</mat-hint>
+          <mat-error *ngIf="form.get('webHookURL').hasError('required')">
+            DiscordのWebHook URLを入力してください
+          </mat-error>
+        </mat-form-field>
+        <button
+          class="profile-form__button"
+          [disabled]="form.invalid || form.pristine"
+          mat-raised-button
+          (click)="updateUserName()"
+        >
+          保存する
+        </button>
+      </form>
     </div>
-    <button (click)="withdrawal()">退会する</button>
-  </section>
-</div>
+    <div class="delete-user">
+      <button mat-button (click)="openDeleteUserDialog()">退会はこちら</button>
+    </div>
+  </div>
+</section>
