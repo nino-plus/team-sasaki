@@ -9,6 +9,7 @@ import { User } from 'src/app/interfaces/user';
 export class RankCardComponent implements OnInit {
   @Input() user: User;
   @Input() rankingNumber: number;
+  @Input() rankingType: 'best' | 'worst';
 
   constructor() { }
 
