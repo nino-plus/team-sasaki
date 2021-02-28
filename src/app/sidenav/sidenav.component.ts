@@ -60,8 +60,14 @@ export class SidenavComponent implements OnInit, OnDestroy {
         this.activeTask.timeLimit * 60000 +
         this.activeTask.createdAt.toDate().getTime();
       const timeLimitDate = new Date(timeLimitNum);
-      const hour = timeLimitDate.getHours();
-      const minutes = timeLimitDate.getMinutes();
+      let hour = timeLimitDate.getHours().toString();
+      let minutes = timeLimitDate.getMinutes().toString();
+      if (hour.length === 1) {
+        hour = `0${hour}`;
+      }
+      if (minutes.length === 1) {
+        minutes = `0${minutes}`;
+      }
       this.timeLimitDate = `${hour}:${minutes}`;
       const remainingSeconds =
         (this.activeTask.timeLimit * 60000 -
@@ -70,13 +76,25 @@ export class SidenavComponent implements OnInit, OnDestroy {
       this.value = (remainingSeconds / (this.activeTask.timeLimit * 60)) * 100;
 
       if (remainingSeconds <= 0) {
+        this.snackBar.open('タスクに失敗しました😭');
         this.taskService.updateTaskStatusFailure(this.activeTask.taskId);
         const callable = this.afn.httpsCallable('subtractPoint');
         return callable({}).toPromise();
       }
-      const hoursLeft = Math.floor(remainingSeconds / (60 * 60)) % 24;
-      const minitesLeft = Math.floor(remainingSeconds / 60) % 60;
-      const secondsLeft = Math.floor(remainingSeconds) % 60;
+      let hoursLeft = (
+        Math.floor(remainingSeconds / (60 * 60)) % 24
+      ).toString();
+      let minitesLeft = (Math.floor(remainingSeconds / 60) % 60).toString();
+      let secondsLeft = (Math.floor(remainingSeconds) % 60).toString();
+      if (hoursLeft.length === 1) {
+        hoursLeft = `0${hoursLeft}`;
+      }
+      if (minitesLeft.length === 1) {
+        minitesLeft = `0${minitesLeft}`;
+      }
+      if (secondsLeft.length === 1) {
+        secondsLeft = `0${secondsLeft}`;
+      }
       const time = `${hoursLeft}:${minitesLeft}:${secondsLeft}`;
       this.limitTime = time;
     }
@@ -85,7 +103,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   openGiveupDialog(): void {
     const dialogRef = this.dialog.open(GiveupDialogComponent, {
       data: { taskId: this.activeTask.taskId },
-      autoFocus: false
+      autoFocus: false,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -97,7 +115,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   openFinishDialog(): void {
     const dialogRef = this.dialog.open(FinishDialogComponent, {
       data: { taskId: this.activeTask.taskId },
-      autoFocus: false
+      autoFocus: false,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
