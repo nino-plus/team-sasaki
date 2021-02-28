@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-rank-card',
@@ -11,7 +12,9 @@ export class RankCardComponent implements OnInit {
   @Input() rankingNumber: number;
   @Input() rankingType: 'best' | 'worst';
 
-  constructor() { }
+  constructor(
+    public authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }

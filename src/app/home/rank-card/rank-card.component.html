@@ -1,4 +1,7 @@
-<div class="user user--{{ rankingType }}-{{ rankingNumber }}">
+<div
+  class="user user--{{ rankingType }}-{{ rankingNumber }}"
+  [class.user--owner]="user.uid === authService.uid"
+>
   <img class="user__avatar" [src]="user.avatarURL" alt="" />
   <div class="user__items">
     <p>{{ user.name }}</p>
