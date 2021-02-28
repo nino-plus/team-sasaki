@@ -1,6 +1,6 @@
 <app-header [isWelcomePage]="true"></app-header>
 <div class="welcome">
-  <div class="hero">
+  <section class="hero">
     <h1 class="hero__title">やるべきことができる人に</h1>
     <p class="hero__lead">discordと連携する、はずかしさをやる気に変えるタイマーアプリ</p>
     <button mat-flat-button class="hero__btn white-btn" (click)="authService.login()">
@@ -8,9 +8,9 @@
     </button>
     <div class="hero__img-skelton" *ngIf="isLoadingImg"></div>
     <img class="hero__img fade" src="assets/images/hero.png" alt="" (load)="isLoadingImg = false">
-  </div>
+  </section>
   <div class="usage-wrapper">
-    <div class="usage">
+    <section class="usage">
       <h2 class="usage__title">使い方</h2>
       <div class="usage-steps">
         <div *ngFor="let step of usageSteps; index as i" class="usage-steps__item">
@@ -23,9 +23,9 @@
           </figure>
         </div>
       </div>
-    </div>
+    </section>
   </div>
-  <div class="last-recommend">
+  <section class="last-recommend">
     <div class="last-recommend__glitter">
       <img src="assets/images/glitter.svg" alt="">
     </div>
@@ -36,6 +36,6 @@
         Googleアカウントでログイン
       </button>
     </div>
-  </div>
+  </section>
 </div>
 <app-footer></app-footer>
