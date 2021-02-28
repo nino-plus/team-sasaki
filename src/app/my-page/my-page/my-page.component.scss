@@ -7,6 +7,7 @@
     display: flex;
     align-items: end;
     gap: 32px;
+    flex-wrap: wrap;
   }
   &__image {
     position: relative;
@@ -63,4 +64,12 @@
     display: block;
     margin-left: auto;
   }
+}
+
+.task-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 0;
 }

@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+
+.task-card {
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 4px;
+  @include mat-elevation(4);
+  &__title {
+    font-size: 20px;
+  }
+  &__contents {
+  }
+  &__detail {
+  }
+  &__limit {
+  }
+  &__create {
+  }
+}

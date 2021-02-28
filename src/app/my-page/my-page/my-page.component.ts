@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 import { CropComponent } from '../crop/crop.component';
 import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
@@ -30,6 +31,7 @@ export class MyPageComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private authService: AuthService,
     private fb: FormBuilder,
+    public taskService: TaskService
   ) { }
 
   ngOnInit(): void {

@@ -23,6 +23,11 @@
     color: $color-font-white;
   }
 
+  &--owner {
+    background-color: $color-sub;
+    color: $color-font-white;
+  }
+
   &__avatar {
     width: 48px;
     height: 48px;
