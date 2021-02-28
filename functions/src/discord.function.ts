@@ -14,15 +14,18 @@ export const sendFailureResult = functions
       if (userData) {
         const message =
           userData.name + 'さんが' + data.title + 'に失敗しました...';
+        const messageSetting = `l_text:Roboto_60_bold:${message},co_rgb:252525,w_800,c_fit/`;
+        const imageUrl =
+          'https://res.cloudinary.com/demccsjrb/image/upload/' +
+          messageSetting +
+          'v1614486536/images/dokuro_backgroud_2x_lkfrvf.png';
         const body = {
           username: userData.name,
-          content: message,
           avatar_url: userData.avatarURL,
           embeds: [
             {
               image: {
-                url:
-                  'https://firebasestorage.googleapis.com/v0/b/pridetimer.appspot.com/o/images%2FF3F0FF7E-E4A9-454C-B867-506EFC825D99_4_5005_c.jpeg?alt=media&token=577da38d-609f-48de-8658-a0db9f5e707b',
+                url: imageUrl,
               },
             },
           ],
