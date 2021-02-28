@@ -12,10 +12,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
-  declarations: [MyPageComponent, CropComponent],
+  declarations: [MyPageComponent, CropComponent, DeleteUserDialogComponent],
   imports: [
     CommonModule,
     MyPageRoutingModule,
@@ -27,7 +29,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ]
 })
 export class MyPageModule { }

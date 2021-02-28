@@ -1,14 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AngularFireFunctions } from '@angular/fire/functions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { CropComponent } from '../crop/crop.component';
+import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
 
 @Component({
   selector: 'app-my-page',
@@ -31,8 +30,6 @@ export class MyPageComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private authService: AuthService,
     private fb: FormBuilder,
-    private afn: AngularFireFunctions,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -68,19 +65,16 @@ export class MyPageComponent implements OnInit, OnDestroy {
   }
 
   openCropDialog(event: any): void {
-    const dialogRef = this.dialog.open(CropComponent, {
+    this.dialog.open(CropComponent, {
       data: { event },
       autoFocus: false
     });
   }
 
-  async withdrawal(): Promise<void> {
-    const callable = this.afn.httpsCallable('deleteAfUser');
-    await callable(this.authService.uid)
-      .toPromise();
-    this.router.navigateByUrl('/welcome');
-    this.authService.afAuth.signOut().then(() => {
-      this.snackBar.open('退会しました');
+  openDeleteUserDialog(): void {
+    this.dialog.open(DeleteUserDialogComponent, {
+      autoFocus: false,
+      width: '400px',
     });
   }
 }

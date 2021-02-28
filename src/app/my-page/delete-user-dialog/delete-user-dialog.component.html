@@ -1,0 +1,29 @@
+<h1 matDialogTitle>退会</h1>
+
+<mat-dialog-content>
+  <p>本当に退会しますか？</p>
+  <p>
+    退会後全てのデータが削除されます。データは元に戻すことができませんがよろしいですか？
+  </p>
+  <section>
+    <mat-checkbox
+      (change)="isDelete = $event.checked"
+      color="primary"
+      class="check-box"
+    >
+      退会する場合チェックしてください
+    </mat-checkbox>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button matDialogClose>思いとどまる</button>
+  <button
+    [disabled]="!isDelete"
+    mat-raised-button
+    color="warn"
+    (click)="withdrawal()"
+  >
+    退会する
+  </button>
+</mat-dialog-actions>

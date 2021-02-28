@@ -36,4 +36,9 @@ body {
       max-height: 100vh;
     }
   }
+
+  .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background,
+  .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+    background-color: $color-accent;
+  }
 }
