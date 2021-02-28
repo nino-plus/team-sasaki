@@ -1,55 +1,54 @@
-<app-header></app-header>
 <div class="container">
   <div class="signup">
     <h2 class="signup__title">新規登録</h2>
-      <form class="signup-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <mat-form-field class="signup-form__title" appearance="outline">
-          <mat-label>名前</mat-label>
-          <input
-            type="text"
-            formControlName="name"
-            matInput
-            #nameInput
-            placeholder="名前"
-            autocomplete="off"
-            required
-          />
-          <mat-hint align="end"
-            >{{ nameInput.value?.length || 0 }}/{{ nameMaxLength }}</mat-hint
-          >
-          <mat-error *ngIf="nameControl.hasError('required')"
-            >必須項目です</mat-error
-          >
-          <mat-error *ngIf="nameControl.hasError('maxlength')"
-            >名前は{{ nameMaxLength }}文字以内です</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="signup-form__webhookURL" appearance="outline">
-          <mat-label>discordのwebhookURL</mat-label>
-          <input
-            type="text"
-            formControlName="webhookURL"
-            matInput
-            #webhookURLInput
-            placeholder="https://discord.com/api/webhooks/xxx"
-            autocomplete="off"
-            required
-          />
-          <mat-error *ngIf="webhookURLControl.hasError('required')"
-            >必須項目です</mat-error
-          >
-          <mat-error *ngIf="webhookURLControl.hasError('webhookURLValidator')"
-            >不正な値です</mat-error
-          >
-        </mat-form-field>
-        <button
-          class="signup-form__submit"
-          [disabled]="form.invalid || form.pristine || inProgress"
-          mat-flat-button
-          color="primary"
+    <form class="signup-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field class="signup-form__title" appearance="outline">
+        <mat-label>名前</mat-label>
+        <input
+          type="text"
+          formControlName="name"
+          matInput
+          #nameInput
+          placeholder="名前"
+          autocomplete="off"
+          required
+        />
+        <mat-hint align="end"
+          >{{ nameInput.value?.length || 0 }}/{{ nameMaxLength }}</mat-hint
         >
-          登録する
-        </button>
-      </form>
+        <mat-error *ngIf="nameControl.hasError('required')"
+          >必須項目です</mat-error
+        >
+        <mat-error *ngIf="nameControl.hasError('maxlength')"
+          >名前は{{ nameMaxLength }}文字以内です</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="signup-form__webhookURL" appearance="outline">
+        <mat-label>discordのwebhookURL</mat-label>
+        <input
+          type="text"
+          formControlName="webhookURL"
+          matInput
+          #webhookURLInput
+          placeholder="https://discord.com/api/webhooks/xxx"
+          autocomplete="off"
+          required
+        />
+        <mat-error *ngIf="webhookURLControl.hasError('required')"
+          >必須項目です</mat-error
+        >
+        <mat-error *ngIf="webhookURLControl.hasError('webhookURLValidator')"
+          >不正な値です</mat-error
+        >
+      </mat-form-field>
+      <button
+        class="signup-form__submit"
+        [disabled]="form.invalid || form.pristine || inProgress"
+        mat-flat-button
+        color="primary"
+      >
+        登録する
+      </button>
+    </form>
   </div>
 </div>
