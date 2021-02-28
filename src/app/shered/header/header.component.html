@@ -11,11 +11,23 @@
   <div *ngIf="!isWelcomePage" class="actions">
     <ng-container *ngIf="userService.user$ | async as user">
       <div class="btn-layout">
-        <button (click)="openCreateTaskDialog()" matRipple class="primary-btn">
+        <button
+          (click)="openCreateTaskDialog()"
+          matRipple
+          class="primary-btn"
+          [disabled]="(tasks$ | async)?.length"
+        >
           <mat-icon class="create-task-icon" inline="true">{{
             isPcScreen ? 'add_circle_outline' : 'add'
           }}</mat-icon>
-          <span *ngIf="isPcScreen">タスクを作成</span>
+          <span *ngIf="isPcScreen">
+            <ng-container
+              *ngIf="(tasks$ | async)?.length == 0; else IsActiveTask"
+            >
+              タスクを作成
+            </ng-container>
+            <ng-template #IsActiveTask>進行中</ng-template>
+          </span>
         </button>
       </div>
       <button
