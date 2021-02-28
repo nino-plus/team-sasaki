@@ -1,8 +1,36 @@
 <app-header [isWelcomePage]="true"></app-header>
 <div class="welcome">
-  <div class="container">
-    <h2 class="catch-title">やるべきことができる人に</h2>
-    <h3>はずかしさをやる気に変えるタイマーアプリ</h3>
-    <button mat-flat-button class="white-button" (click)="authService.login()">Googleアカウントでログイン</button>
+  <div class="hero">
+    <h1 class="hero__title">やるべきことができる人に</h1>
+    <p class="hero__lead">discordと連携する、はずかしさをやる気に変えるタイマーアプリ</p>
+    <button mat-flat-button class="hero__btn white-btn" (click)="authService.login()">
+      Googleアカウントでログイン
+    </button>
+    <div class="hero__img-skelton" *ngIf="isLoadingImg"></div>
+    <img class="hero__img fade" src="assets/img/hero.png" alt="" (load)="isLoadingImg = false">
+  </div>
+  <div class="usage-wrapper">
+    <div class="usage">
+      <h2 class="usage__title">使い方</h2>
+      <div class="usage-steps">
+        <div *ngFor="let step of usageSteps; index as i" class="usage-steps__item">
+          <div class="usage-steps__content">
+            <span class="usage-steps__num">{{ i + 1 }}</span>
+            <p class="usage-steps__text">{{ step }}</p>
+          </div>
+          <figure class="usage-steps__img-wrapper">
+            <img src="assets/img/step-{{ i + 1 }}.png" alt="" class="usage-steps__img usage-steps__img--{{i + 1}}">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="last-recommend">
+    <h1 class="last-recommend__title">今に集中するために</h1>
+    <p class="last-recommend__lead">ログインして試してみよう</p>
+    <button mat-flat-button class="last-recommend__btn white-btn" (click)="authService.login()">
+      Googleアカウントでログイン
+    </button>
   </div>
 </div>
+<app-footer></app-footer>
