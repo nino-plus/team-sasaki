@@ -44,8 +44,10 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.userService.user$.subscribe((currentUserData) => {
-      this.currentUserData = currentUserData;
-      this.form.patchValue(currentUserData);
+      if (currentUserData) {
+        this.currentUserData = currentUserData;
+        this.form.patchValue(currentUserData);
+      }
     });
   }
 
@@ -65,7 +67,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.inProgress = true;
     const formData = this.form.value;
-    this.userService.updateUser(this.currentUserData, formData)
+    this.userService.updateUser(formData)
       .then(() => {
         this.inProgress = false;
         this.router.navigateByUrl('/');
