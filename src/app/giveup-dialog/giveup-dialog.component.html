@@ -4,14 +4,14 @@
     <p>本当に諦めますか？</p>
   </mat-dialog-content>
   <mat-dialog-actions align="center">
-    <button mat-button mat-dialog-close>キャンセル</button>
+    <button mat-button mat-dialog-close>いいえ</button>
     <button
+      class="giveup-btn"
       mat-button
       (click)="fail()"
       [mat-dialog-close]="true"
-      cdkFocusInitial
     >
-      諦める
+      はい…
     </button>
   </mat-dialog-actions>
 </div>

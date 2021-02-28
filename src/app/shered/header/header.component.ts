@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
 
   openCreateTaskDialog(): void {
     this.dialog.open(CreateTaskDialogComponent, {
-      width: '1200px',
+      width: '800px',
       autoFocus: false
     });
   }
