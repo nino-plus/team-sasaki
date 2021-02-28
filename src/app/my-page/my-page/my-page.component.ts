@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subscription } from 'rxjs';
@@ -15,20 +15,28 @@ import { CropComponent } from '../crop/crop.component';
 })
 export class MyPageComponent implements OnInit, OnDestroy {
   user$: Observable<User> = this.userService.user$;
-  userName = new FormControl('', Validators.required);
   isUpdated = false;
   subscription: Subscription;
+
+  form: FormGroup = this.fb.group({
+    userName: ['', [Validators.required]],
+    webHookURL: ['', [Validators.required]]
+  });
 
   constructor(
     private userService: UserService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.subscription = this.userService.user$.subscribe((user) => {
-      this.userName.setValue(user.name);
+      this.form.patchValue({
+        userName: user.name,
+        webHookURL: user.webhookURL
+      });
     });
   }
 
@@ -41,8 +49,14 @@ export class MyPageComponent implements OnInit, OnDestroy {
   }
 
   updateUserName(): void {
-    const newName = this.userName.value;
-    this.userService.updateUserName(this.authService.uid, newName).then(() => {
+    const formData = this.form.value;
+    const userData: Partial<User> = {
+      uid: this.authService.uid,
+      name: formData.userName,
+      webhookURL: formData.webHookURL
+    };
+
+    this.userService.updateUser(userData).then(() => {
       this.snackBar.open('ユーザー名が更新されました', null, {
         duration: 2000,
       });
@@ -52,6 +66,7 @@ export class MyPageComponent implements OnInit, OnDestroy {
   openCropDialog(event: any): void {
     const dialogRef = this.dialog.open(CropComponent, {
       data: { event },
+      autoFocus: false
     });
   }
 }

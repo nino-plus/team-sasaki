@@ -27,13 +27,12 @@ export class UserService {
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
     private storage: AngularFireStorage
-  ) {}
+  ) { }
 
-  updateUser(user: User, newUserData: Partial<User>): Promise<void> {
-    return this.db.doc<User>(`users/${user.uid}`).set(
+  updateUser(user: Partial<User>): Promise<void> {
+    return this.db.doc<Partial<User>>(`users/${user.uid}`).set(
       {
         ...user,
-        ...newUserData,
       },
       { merge: true }
     );

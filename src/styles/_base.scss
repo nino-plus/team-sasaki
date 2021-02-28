@@ -30,4 +30,10 @@ body {
   .mat-card-header-text {
     margin: 0;
   }
+
+  app-crop {
+    .mat-dialog-content {
+      max-height: 100vh;
+    }
+  }
 }

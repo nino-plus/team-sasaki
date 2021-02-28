@@ -59,13 +59,13 @@ export class SignupComponent implements OnInit, OnDestroy {
       return null;
     }
     return /(http(s)?:\/\/discord.com\/api\/webhooks\/[a-zA-Z0-9-.!'()*;/?:@&=+$,%#-_]+)/gi
-      .test(formControl.value) ? null : { webhookURLValidator: true } ;
+      .test(formControl.value) ? null : { webhookURLValidator: true };
   }
 
   onSubmit(): void {
     this.inProgress = true;
     const formData = this.form.value;
-    this.userService.updateUser(this.currentUserData, formData)
+    this.userService.updateUser(formData)
       .then(() => {
         this.inProgress = false;
         this.router.navigateByUrl('/');
