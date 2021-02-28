@@ -25,9 +25,9 @@
         [style.background-image]="'url(' + user?.avatarURL + ')'"
       ></button>
       <mat-menu #menu="matMenu">
-        <a mat-menu-item routerLink="/setting">
-          <mat-icon>settings</mat-icon>
-          <span>設定</span>
+        <a mat-menu-item routerLink="/my-page">
+          <mat-icon>account_circle</mat-icon>
+          <span>マイページ</span>
         </a>
         <button mat-menu-item (click)="authService.logout()">
           <mat-icon>logout</mat-icon>
