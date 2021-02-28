@@ -15,11 +15,10 @@
           <p class="timer__limit-time">{{ timeLimitDate }}</p>
         </div>
       </div>
-      <div class="task__maxim">
+      <div class="task__maxim" *ngIf="meigen">
         <h2 class="task__maxim-title">今日の名言</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
-          ducimus?
+          {{meigen.meigen}} - {{meigen.auther}}
         </p>
       </div>
       <div class="task__buttons">
