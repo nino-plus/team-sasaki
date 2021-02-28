@@ -1,6 +1,6 @@
 <div
   class="user user--{{ rankingType }}-{{ rankingNumber }}"
-  [class.user--owner]="user.uid === authService.uid"
+  [class.user--owner]="user.uid === authService.uid && rankingNumber !== 1"
 >
   <img class="user__avatar" [src]="user.avatarURL" alt="" />
   <div class="user__items">
