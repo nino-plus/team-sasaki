@@ -6,6 +6,7 @@
   <mat-dialog-actions align="center">
     <button mat-button mat-dialog-close>いいえ</button>
     <button
+      [disabled]="buttonService.processing"
       class="giveup-btn"
       mat-button
       (click)="fail()"
