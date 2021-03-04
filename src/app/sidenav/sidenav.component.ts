@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GiveupDialogComponent } from '../giveup-dialog/giveup-dialog.component';
 import { FinishDialogComponent } from '../finish-dialog/finish-dialog.component';
@@ -28,6 +34,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
   time: number;
   meigen = this.meigenService.getRandomMeigen();
+  @Output() remainingTime = new EventEmitter();
+  @Output() spinnerValue = new EventEmitter();
 
   constructor(
     public dialog: MatDialog,
@@ -74,6 +82,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
           (date - this.activeTask.createdAt.toDate().getTime())) /
         1000;
       this.value = (remainingSeconds / (this.activeTask.timeLimit * 60)) * 100;
+      this.spinnerValue.emit(this.value);
 
       if (remainingSeconds <= 0) {
         this.snackBar.open('タスクに失敗しました😭');
@@ -97,6 +106,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
       }
       const time = `${hoursLeft}:${minitesLeft}:${secondsLeft}`;
       this.limitTime = time;
+      this.remainingTime.emit(time);
     }
   }
 

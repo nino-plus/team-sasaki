@@ -15,7 +15,10 @@
     >
       <mat-icon>clear</mat-icon>
     </button>
-    <app-sidenav></app-sidenav>
+    <app-sidenav
+      (spinnerValue)="setSpinnerValue($event)"
+      (remainingTime)="setRemainingTime($event)"
+    ></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-header class="header">
@@ -28,6 +31,17 @@
         <mat-icon inlne="true">menu</mat-icon>
       </button>
     </app-header>
+    <div class="timer-layout" *ngIf="(tasks$ | async)?.length">
+      <button class="timer-btn" mat-raised-button (click)="sidenav.toggle()">
+        <mat-progress-spinner
+          class="timer-spinner"
+          [diameter]="100"
+          [value]="value"
+        >
+        </mat-progress-spinner>
+        <p>{{ time }}</p>
+      </button>
+    </div>
     <div class="grid">
       <div class="main">
         <router-outlet></router-outlet>
