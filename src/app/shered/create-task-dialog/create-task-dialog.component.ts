@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from 'src/app/interfaces/task';
 import { AuthService } from 'src/app/services/auth.service';
+import { ButtonService } from 'src/app/services/button.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-create-task-dialog',
   templateUrl: './create-task-dialog.component.html',
-  styleUrls: ['./create-task-dialog.component.scss']
+  styleUrls: ['./create-task-dialog.component.scss'],
 })
 export class CreateTaskDialogComponent implements OnInit {
   isPcScreen: boolean = this.uiService.isLargeScreen();
@@ -19,10 +25,13 @@ export class CreateTaskDialogComponent implements OnInit {
   readonly DETAIL_MAX_LENGTH = 60;
 
   form: FormGroup = this.fb.group({
-    title: ['', [Validators.required, Validators.maxLength(this.TITLE_MAX_LENGTH)]],
+    title: [
+      '',
+      [Validators.required, Validators.maxLength(this.TITLE_MAX_LENGTH)],
+    ],
     detail: ['', Validators.maxLength(this.DETAIL_MAX_LENGTH)],
     hour: [0, [Validators.required]],
-    minutes: [1, [Validators.required]]
+    minutes: [1, [Validators.required]],
   });
 
   get titleCtl(): FormControl {
@@ -46,12 +55,13 @@ export class CreateTaskDialogComponent implements OnInit {
     private taskService: TaskService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<CreateTaskDialogComponent>,
-    private uiService: UiService
-  ) { }
+    private uiService: UiService,
+    public buttonService: ButtonService
+  ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe(group => {
-      if ((group.hour === 0) && (group.minutes === 0)) {
+    this.form.valueChanges.subscribe((group) => {
+      if (group.hour === 0 && group.minutes === 0) {
         this.isTimeValid = true;
       } else {
         this.isTimeValid = false;
@@ -67,15 +77,17 @@ export class CreateTaskDialogComponent implements OnInit {
   }
 
   createTask(): void {
+    this.buttonService.processing = true;
     const formData = this.form.value;
     const taskData: Pick<Task, 'title' | 'detail' | 'timeLimit' | 'uid'> = {
       uid: this.authService.uid,
       title: formData.title,
       detail: formData.detail,
-      timeLimit: this.convertToLimitTime()
+      timeLimit: this.convertToLimitTime(),
     };
 
     this.taskService.createTask(taskData).then(() => {
+      this.buttonService.processing = false;
       this.snackBar.open('タスクをはじめました✨');
       this.dialogRef.close();
     });

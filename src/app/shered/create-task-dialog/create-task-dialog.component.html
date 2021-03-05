@@ -61,7 +61,7 @@
   <button
     (click)="createTask()"
     [class.disabled]="form.invalid || isTimeValid"
-    [disabled]="form.invalid || isTimeValid"
+    [disabled]="form.invalid || isTimeValid || buttonService.processing"
     class="primary-btn"
     mat-button
   >
