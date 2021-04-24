@@ -25,7 +25,7 @@
   }
   &__lead {
     font-size: 20px;
-    opacity: 70%;
+    opacity: 0.7;
     @include sp {
       font-size: 16px;
     }
@@ -82,6 +82,7 @@
 }
 
 .usage-steps {
+  counter-reset:step;
   &__item + &__item {
     margin-top: 48px;
   }
@@ -98,23 +99,25 @@
       width: 350px;
       margin: 0 auto;
     }
-  }
-  &__num {
-    color: $color-font-white;
-    display: block;
-    text-align: center;
-    line-height: 32px;
-    min-width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: $color-sub;
+    &::before{
+      counter-increment:step;
+      content:counter(step);
+      color: $color-font-white;
+      display: block;
+      text-align: center;
+      line-height: 32px;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: $color-sub;
+    }
   }
   &__text {
     margin: 4px 8px;
     white-space: pre-wrap;
     text-align: start;
     line-height: 1.5;
-    font-weight: bold
+    font-weight: bold;
   }
   &__img-wrapper {
     max-width: 400px;
@@ -122,18 +125,8 @@
   }
   &__img {
     margin: 24px 0;
-    &--1 {
-      width: 80%;
-    }
-    &--2 {
-      width: 100%;
-    }
-    &--3 {
-      width: 60%;
-    }
-    &--4 {
-      width: 40%;
-    }
+    border-radius: 4px;
+    width: 100%;
   }
 }
 
@@ -161,7 +154,7 @@
   }
   &__lead {
     font-size: 16px;
-    opacity: 70%;
+    opacity: 0.7;
     @include sp {
       font-size: 14px;
     }
